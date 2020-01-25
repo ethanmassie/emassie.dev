@@ -1,0 +1,14 @@
+/* Material theming*/
+@import '@angular/material/_theming';
+
+@include mat-core();
+
+$background-color: #616161;
+
+$primary: mat-palette($mat-blue-grey);
+$accent: mat-palette($mat-amber, A200, A100, A400);
+$warn: mat-palette($mat-deep-orange);
+
+$dark-theme: mat-dark-theme($primary, $accent, $warn);
+
+@include angular-material-theme($dark-theme);
