@@ -1,0 +1,16 @@
+<div>
+  <button mat-icon-button [routerLink]="['/home']">
+    <mat-icon aria-hidden="false">home</mat-icon>
+  </button>
+
+  <button mat-icon-button [matMenuTriggerFor]="projectsMenu">
+    <mat-icon aria-hidden="false">code</mat-icon>
+  </button>
+
+  <mat-menu #projectsMenu>
+    <button mat-menu-item [routerLink]="['/projects']">
+      <mat-icon>dashboard</mat-icon>
+      <span>All</span>
+    </button>
+  </mat-menu>
+</div>
