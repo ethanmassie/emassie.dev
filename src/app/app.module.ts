@@ -7,13 +7,13 @@ import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { HomeModule } from './home/home.module';
-import { ProjectsModule } from './projects/projects.module';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
    declarations: [
       AppComponent,
-      NavbarComponent
+      NavbarComponent,
+      HomeComponent,
    ],
    imports: [
       BrowserModule,
@@ -21,8 +21,6 @@ import { ProjectsModule } from './projects/projects.module';
       MatMenuModule,
       MatIconModule,
 
-      HomeModule,
-      ProjectsModule,
       AppRoutingModule,
    ],
    providers: [
