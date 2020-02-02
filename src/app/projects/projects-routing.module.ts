@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProjectsComponent } from './projects.component';
+import { AllProjectsComponent } from './all-projects/all-projects.component';
 
 
 const routes: Routes = [
-  { path: 'projects', component: ProjectsComponent}
+  { path: '', redirectTo: 'all', pathMatch: 'full' },
+  { path: 'all', component: AllProjectsComponent }
 ];
 
 @NgModule({
