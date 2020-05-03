@@ -1,7 +1,12 @@
 @import 'src/styles';
 
 .contact {
-  ul li {
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
     display: inline-block;
     margin: 1em;
   }
