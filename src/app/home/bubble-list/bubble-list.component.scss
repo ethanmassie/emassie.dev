@@ -1,9 +1,11 @@
+@import "src/styles";
+
 li {
   display: inline-block;
-  border: grey 1px solid;
+  border: lightgrey 1px solid;
   border-radius: 50px;
   margin: .25em;
   color: black;
-  background: antiquewhite;
+  background: lightgrey;
   padding: .5em;
 }
