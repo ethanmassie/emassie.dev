@@ -1,0 +1,41 @@
+@import 'src/styles';
+
+.contact {
+  ul li {
+    display: inline-block;
+    margin: 1em;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  i {
+    color: mat-color($app-accent, 300);
+    margin: .5em;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+
+  .left-column {
+    width: 60%;
+    padding-right: 2em;
+  }
+
+  .right-column {
+    width: 40%;
+    padding-left: 2em;
+  }
+
+  h2 {
+    $header-color: mat-color($app-accent);
+    color: $header-color;
+    border-bottom: $header-color solid;
+  }
+}

@@ -1,1 +1,35 @@
-<p>Home Works</p>
+<div *ngIf="infoService.getInformation() | async as info">
+  <h1><strong>{{info.name}}</strong></h1>
+  <div class="contact">
+    <ul>
+      <li *ngFor="let link of info.links">
+        <a [href]="link.href">
+          <i [class]="link.icon"></i> {{link.display}}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <div class="left-column">
+      <h2>EXPERIENCE</h2>
+      <ng-container *ngFor="let experience of info.experience">
+        <app-experience [experience]="experience"></app-experience>
+      </ng-container>
+      <h2>Education</h2>
+      <ng-container *ngFor="let education of info.education">
+        <app-experience [experience]="education"></app-experience>
+      </ng-container>
+    </div>
+
+    <div class="right-column">
+      <h2>SKILLS</h2>
+        <ng-container *ngFor="let skill of info.skills">
+          <h3>{{skill.name}}</h3>
+          <app-bubble-list [items]="skill.skills"></app-bubble-list>
+        </ng-container>
+      <h2>Interests</h2>
+      <app-bubble-list [items]="info.interests"></app-bubble-list>
+    </div>
+  </div>
+</div>
