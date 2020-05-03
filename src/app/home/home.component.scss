@@ -20,17 +20,15 @@
 .content {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
   justify-content: space-between;
+  flex-wrap: wrap;
 
   .left-column {
-    width: 60%;
-    padding-right: 2em;
+    max-width: 800px;
   }
 
   .right-column {
-    width: 40%;
-    padding-left: 2em;
+    max-width: 500px;
   }
 
   h2 {
