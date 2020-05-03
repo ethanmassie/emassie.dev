@@ -1,6 +1,10 @@
-@import '_theme';
+@import '~@angular/material/theming';
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@include mat-core();
 
-body {
-  background-color: $background-color;
-}
+$app-primary: mat-palette($mat-blue-gray);
+$app-accent: mat-palette($mat-pink, A200, A200, A400);
+
+$app-theme: mat-dark-theme($app-primary, $app-accent);
+
+@include angular-material-theme($app-theme);
