@@ -5,7 +5,7 @@ import {Observable, of} from "rxjs";
 const information: Information = {
   name: 'Ethan Massie',
   links: [
-    {icon: 'fa fa-at', display: 'ethanjmassie@gmail.com', href: 'mailto:ethanjmassie@gmail.com'},
+    {icon: 'fa fa-at', display: 'ethan@emassie.dev', href: 'mailto:ethan@emassie.dev'},
     {icon: 'fa fa-linkedin', display: 'linkedin.com/in/ethan-massie', href: 'https://linkedin.com/in/ethan-massie'},
     {icon: 'fa fa-github', display: 'github.com/ethanmassie', href: 'https://github.com/ethanmassie'},
   ],
