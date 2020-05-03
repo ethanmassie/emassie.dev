@@ -8,20 +8,27 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
+import {MatButtonModule} from "@angular/material/button";
+import { ExperienceComponent } from './home/experience/experience.component';
+import {CoreModule} from "./core/core.module";
+import { BubbleListComponent } from './home/bubble-list/bubble-list.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       NavbarComponent,
       HomeComponent,
+      ExperienceComponent,
+      BubbleListComponent,
    ],
    imports: [
       BrowserModule,
       BrowserAnimationsModule,
       MatMenuModule,
       MatIconModule,
-
+      MatButtonModule,
       AppRoutingModule,
+      CoreModule,
    ],
    providers: [
      MatIconRegistry
