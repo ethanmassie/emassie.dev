@@ -1,0 +1,15 @@
+<div *ngIf="!!experience">
+  <h3>{{experience.title}}</h3>
+  <h3>{{experience.employer}}</h3>
+  <div class="flex-container">
+    <span>
+      <i class="fa fa-calendar"></i>{{experience.timeFrame}}
+    </span>
+    <span *ngIf="!!experience.location">
+      <i class="fa fa-location-arrow"></i>{{experience.location}}
+    </span>
+  </div>
+  <ul>
+    <li *ngFor="let detail of experience.details">{{detail}}</li>
+  </ul>
+</div>
