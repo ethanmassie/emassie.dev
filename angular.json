@@ -123,15 +123,6 @@
               "devServerTarget": "crispy-goggles:serve:production"
             }
           }
-        },
-        "deploy": {
-          "builder": "angular-cli-ghpages:deploy",
-          "options": {
-            "repo": "https://github.com/ethanmassie/ethanmassie.github.io",
-            "name": "ethanmassie",
-            "email": "ethan.massie1@gmail.com",
-            "branch": "master"
-          }
         }
       }
     }
