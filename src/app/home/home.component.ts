@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {InformationService} from "../core/information.service";
+import {InformationService} from '../core/information.service';
+import {Observable} from 'rxjs';
+import {Information} from '../core/models/information.model';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +10,12 @@ import {InformationService} from "../core/information.service";
 })
 export class HomeComponent implements OnInit {
 
+  information: Observable<Information>;
+
   constructor(public infoService: InformationService) { }
 
   ngOnInit() {
+    this.information = this.infoService.getInformation();
   }
 
 }

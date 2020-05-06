@@ -1,4 +1,4 @@
-<div *ngIf="infoService.getInformation() | async as info">
+<div *ngIf="information | async as info">
   <h1><strong>{{info.name}}</strong></h1>
   <div class="contact">
     <ul>
@@ -24,7 +24,7 @@
 
     <div class="right-column">
       <h2>SKILLS</h2>
-        <ng-container *ngFor="let skill of info.skills">
+        <ng-container *ngFor="let skill of info.skillGroups">
           <h3>{{skill.name}}</h3>
           <app-bubble-list [items]="skill.skills"></app-bubble-list>
         </ng-container>

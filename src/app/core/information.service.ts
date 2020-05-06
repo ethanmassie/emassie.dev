@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Information} from "./models/information.model";
-import {Observable, of} from "rxjs";
+import {AngularFirestore} from '@angular/fire/firestore';
+import {Information} from './models/information.model';
+import {Observable} from 'rxjs';
+import {tap} from "rxjs/operators";
 
 const information: Information = {
   name: 'Ethan Massie',
@@ -48,23 +50,29 @@ const information: Information = {
       ]
     }
   ],
-  skills: [
+  skillGroups: [
     {name: 'Languages', skills: ['Typescript', 'Java', 'HTML5', 'CSS', 'SCSS', 'BASH', 'SQL', 'Python', 'Go']},
     {name: 'Web Development', skills: ['Angular', 'RxJS', 'Spring', 'JPA', 'Hibernate', 'PrimeNG', 'Angular Material', 'Angular CDK']},
     {name: 'System Administration', skills: ['Linux', 'Ceph', 'Virtualization', 'Puppet', 'Ansible', ]},
     {name: 'Tools', skills: ['GIT', 'SVN', 'Jenkins', 'NPM', 'Maven', 'VSCode', 'Vim', 'Visual Paradigm']}
   ],
   interests: ['Open Source', 'Linux', 'Philosophy', 'Japanese', 'Musical Instruments', 'Trading Card Games']
-}
+};
+
+const myInfoId = 'cG7UZ5b5ueV3r8kJ5LsW';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InformationService {
 
-  constructor() { }
+  constructor(private firestore: AngularFirestore) { }
 
   public getInformation(): Observable<Information> {
-    return of(information);
+    return this.firestore.doc<Information>(`information/${myInfoId}`).valueChanges().pipe(
+      tap(data => {
+        console.log(data);
+      })
+    );
   }
 }
