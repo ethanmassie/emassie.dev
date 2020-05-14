@@ -3,7 +3,7 @@
   <div class="contact">
     <ul>
       <li *ngFor="let link of info.links">
-        <a [href]="link.href">
+        <a target="_blank" [href]="link.href">
           <i [class]="link.icon"></i> {{link.display}}
         </a>
       </li>
