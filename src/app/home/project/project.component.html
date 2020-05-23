@@ -1,0 +1,11 @@
+<a [href]="project.githubLink" target="_blank">
+  <mat-card>
+    <mat-card-title>{{ project.name }}</mat-card-title>
+    <mat-card-subtitle>{{ project.description }}</mat-card-subtitle>
+    <mat-card-content>
+      <ul class="list-inline">
+        <li *ngFor="let point of project.bulletPoints">{{point}}</li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+</a>
