@@ -4,7 +4,6 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'project', loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule) },
   { path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 
