@@ -7,9 +7,47 @@ $app-accent: mat-palette($mat-pink, A200, A200, A400);
 
 $app-theme: mat-dark-theme($app-primary, $app-accent);
 
+$primary: mat-color($app-primary);
+$accent: mat-color($app-accent);
+$light-accent: mat-color($app-accent, 300);
+
 @include angular-material-theme($app-theme);
 
 html, body {
   margin: 0;
   min-height: 100%;
+}
+
+ul {
+  list-style: circle;
+}
+
+.app-header {
+  color: $accent;
+  border-bottom: $accent solid;
+}
+
+.list-inline {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  li {
+    margin: 1em;
+  }
+}
+
+.list-unstyle {
+  list-style: none;
+  padding: 0;
+}
+
+.iconic-link {
+  color: white;
+  text-decoration: none;
+
+  i {
+    color: $light-accent;
+    margin: .5em;
+  }
 }
