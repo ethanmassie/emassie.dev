@@ -1,7 +1,12 @@
 <a [href]="project.githubLink" target="_blank">
-  <mat-card>
-    <mat-card-title>{{ project.name }}</mat-card-title>
-    <mat-card-subtitle>{{ project.description }}</mat-card-subtitle>
+  <mat-card class="align-center">
+    <div class="align-center">
+      <mat-card-title><strong>{{ project.name }}</strong></mat-card-title>
+    </div>
+    <div class="align-center">
+      <mat-card-subtitle>{{ project.description }}</mat-card-subtitle>
+    </div>
+
     <mat-card-content>
       <ul class="list-inline">
         <li *ngFor="let point of project.bulletPoints">{{point}}</li>
