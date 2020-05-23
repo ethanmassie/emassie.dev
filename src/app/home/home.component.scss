@@ -1,27 +1,5 @@
 @import 'src/styles';
 
-.contact {
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  li {
-    display: inline-block;
-    margin: 1em;
-  }
-
-  a {
-    color: white;
-    text-decoration: none;
-  }
-
-  i {
-    color: mat-color($app-accent, 300);
-    margin: .5em;
-  }
-}
-
 .content {
   display: flex;
   flex-direction: row;
@@ -35,10 +13,10 @@
   .right-column {
     max-width: 500px;
   }
+}
 
-  h2 {
-    $header-color: mat-color($app-accent);
-    color: $header-color;
-    border-bottom: $header-color solid;
+.projects {
+  app-project {
+    margin: 1em;
   }
 }
