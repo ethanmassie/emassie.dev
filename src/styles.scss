@@ -47,9 +47,13 @@ ul {
   padding: 0;
 }
 
-.iconic-link {
+.link-unstyle {
   color: white;
   text-decoration: none;
+}
+
+.iconic-link {
+  @extend .link-unstyle;
 
   i {
     color: $light-accent;
