@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {InformationService} from '../core/information.service';
-import {Observable} from 'rxjs';
-import {Information} from '../core/models/information.model';
+import { Observable } from 'rxjs';
+import { InformationService } from '../core/information.service';
+import { Information } from '../core/models/information.model';
 
 @Component({
   selector: 'app-home',
@@ -10,12 +10,12 @@ import {Information} from '../core/models/information.model';
 })
 export class HomeComponent implements OnInit {
 
-  information: Observable<Information>;
+  information$: Observable<Information>;
 
   constructor(public infoService: InformationService) { }
 
   ngOnInit() {
-    this.information = this.infoService.getInformation();
+    this.information$ = this.infoService.getInformation();
   }
 
 }

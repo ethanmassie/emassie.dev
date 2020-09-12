@@ -1,5 +1,4 @@
 @import '~@angular/material/theming';
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @include mat-core();
 
 $app-primary: mat-palette($mat-blue-gray);
@@ -13,9 +12,17 @@ $light-accent: mat-color($app-accent, 300);
 
 @include angular-material-theme($app-theme);
 
+$custom-typography: mat-typography-config(
+  $font-family: 'sans-serif',
+  $headline: mat-typography-level(22px, 38px, 700),
+  $body-1: mat-typography-level(14px, 22px, 500)
+);
+@include angular-material-typography($custom-typography);
+
 html, body {
   margin: 0;
   min-height: 100%;
+  font-family: sans-serif;
 }
 
 ul {
