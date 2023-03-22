@@ -1,1 +1,3 @@
-My portfolio website developed with angular
+# emassie.dev
+
+Static portfolio site developed from scratch.
