@@ -2,7 +2,7 @@
   "name": "emassie.dev",
   "version": "0.0.0",
   "scripts": {
-    "build": "mkdir -p dist && npm run build:styles && cp src/index.html dist",
+    "build": "mkdir -p dist && npm run build:styles && cp src/{index.html,favicon.ico} dist",
     "build:styles": "sass src/scss/index.scss dist/index.css",
     "build:watch": "nodemon -e html,scss --watch src --exec \"npm run build\"",
     "serve": "live-server dist",
