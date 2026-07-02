@@ -1,10 +1,7 @@
 const THEME_STORAGE_KEY = 'theme-override';
 const DARK_THEME = 'dark';
 const LIGHT_THEME = 'light';
-const THEMES = [
-  DARK_THEME,
-  LIGHT_THEME,
-]
+const THEMES = [DARK_THEME, LIGHT_THEME];
 const DEFAULT_THEME = DARK_THEME;
 
 function isValidTheme(theme: string): boolean {
@@ -23,8 +20,10 @@ function initTheme() {
     setTheme(storedTheme);
     return;
   }
-  
-  const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+
+  const prefersLight = window.matchMedia(
+    '(prefers-color-scheme: light)',
+  ).matches;
 
   if (prefersLight) {
     setTheme(LIGHT_THEME);

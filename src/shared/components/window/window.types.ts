@@ -1,7 +1,5 @@
-
-export interface GdGame {
+export interface WindowedApp {
   id: string;
   title: string;
   iconSrc: string;
-  src: string;
 }

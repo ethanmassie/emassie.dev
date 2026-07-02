@@ -26,7 +26,7 @@ export default {
     rolldownOptions: {
       input: {
         main: resolve(import.meta.dirname, 'index.html'),
-        gd: resolve(import.meta.dirname, 'gd/index.html'),
+        app: resolve(import.meta.dirname, 'app/index.html'),
       },
     },
   }

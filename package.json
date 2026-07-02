@@ -10,7 +10,6 @@
     "format": "prettier -w src/**/*{.ts,.scss}"
   },
   "dependencies": {
-    "@lit-labs/router": "^0.1.4",
     "lit": "^3.3.3",
     "prettier": "^3.8.4"
   },

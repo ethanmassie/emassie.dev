@@ -9,10 +9,10 @@
   border-top: none;
   max-width: 1200px;
   max-height: 600px;
-  border-radius: .5em;
+  border-radius: 0.5em;
   overflow: hidden;
 
-  .gd-game-window--header {
+  .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,23 +21,24 @@
     background: var(--em-level-1-background);
     color: var(--em-level-1-contrast);
     box-sizing: border-box;
-    padding: 0 .5em;
+    padding: 0 0.5em;
 
-    .gd-game-window--header-start, .gd-game-window--header-end {
+    .header--start,
+    .header--end {
       display: flex;
-      gap: .5em;
+      gap: 0.5em;
       align-items: center;
     }
 
-    .gd-game-window--icon {
+    .header--icon {
       height: 32px;
     }
 
-    .gd-game-window--title {
+    .header--title {
       font-size: 16px;
     }
 
-    .gd-game-window--header-btn {
+    .header--btn {
       border-radius: 99999px;
       border: unset;
       height: 24px;
@@ -46,25 +47,25 @@
       align-items: center;
       justify-content: center;
 
-      &.gd-game-window--header-max-btn {
+      &.header--max-btn {
         background: #79e216;
       }
 
-      &.gd-game-window--header-close-btn {
+      &.header--close-btn {
         background: #f33030;
       }
     }
   }
 
-  .gd-game-window--outlet {
+  slot#outlet::slotted(*) {
     flex: 1 1 0;
     border: unset;
-    border-bottom-left-radius: .5em;
-    border-bottom-right-radius: .5em;
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
   }
 }
 
-:host(.gd-game-maximized) {
+:host(.em-window-maximized) {
   position: absolute;
   top: 0;
   left: 0;
@@ -75,13 +76,13 @@
   border-radius: unset;
   border: unset;
 
-  .gd-game-window--header-max-btn-grow-icon {
+  .header--max-btn-grow-icon {
     display: none;
   }
 }
 
-:host(:not(.gd-game-maximized)) {
-  .gd-game-window--header-max-btn-shrink-icon {
+:host(:not(.em-window-maximized)) {
+  .header--max-btn-shrink-icon {
     display: none;
   }
 }
