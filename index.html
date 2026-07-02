@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  {{> head }}
+</head>
+
+<body>
+  {{> header }}
+  <main id="main-content">
+    <div class="link-grid">
+      {{#each links}}
+      <a href="{{this.href}}" class="link-grid--item">
+        <img class="link-grid--item-thumbnail" src="{{this.thumbnailSrc}}">
+        <div class="link-grid--item-info">
+          <span>{{this.title}}</span>
+          <span>{{this.description}}</span>
+        </div>
+      </a>
+      {{/each}}
+    </div>
+
+  </main>
+  {{> footer }}
+</body>
+
+</html>

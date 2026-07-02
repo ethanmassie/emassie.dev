@@ -1,0 +1,37 @@
+.link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, var(--_item-width));
+  gap: 1em;
+  padding: 1em 1em;
+  box-sizing: border-box;
+  justify-content: center;
+  width: 100%;
+  --_item-width: var(--link-grid-item-width, 256px);
+  --_item-height: var(--link-grid-item-height, 312px);
+
+  .link-grid--item {
+    display: flex;
+    flex-direction: column;
+    width: var(--_item-width);
+    height: var(--_item-height);
+    box-sizing: border-box;
+    border-radius: .5em;
+    background: var(--em-level-2-background);
+    color: var(--em-level-2-contrast);
+    overflow: hidden;
+    text-decoration: none;
+
+    .link-grid--item-thumbnail {
+      height: 70%;
+      width: 100%;
+    }
+
+    .link-grid--item-info {
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
+}

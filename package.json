@@ -1,0 +1,24 @@
+{
+  "name": "emassie.dev",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "format": "prettier -w src/**/*{.ts,.scss}"
+  },
+  "dependencies": {
+    "@lit-labs/router": "^0.1.4",
+    "lit": "^3.3.3",
+    "prettier": "^3.8.4"
+  },
+  "devDependencies": {
+    "@mdi/js": "^7.4.47",
+    "sass-embedded": "^1.100.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.1.0",
+    "vite-plugin-handlebars": "^2.0.3"
+  }
+}

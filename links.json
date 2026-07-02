@@ -1,0 +1,14 @@
+[
+    {
+        "href": "/gd/?id=ba_boom",
+        "thumbnailSrc": "/ba-boom/Ba-Boom.icon.png",
+        "title": "BA-BOOM!",
+        "description": ""
+    },
+    {
+        "href": "/gd/?id=pyramid",
+        "thumbnailSrc": "/pyramid/pyramid.icon.png",
+        "title": "Pyramid",
+        "description": "Pyramid solitaire clone"
+    }
+]

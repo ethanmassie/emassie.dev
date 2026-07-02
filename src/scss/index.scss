@@ -1,0 +1,74 @@
+@use './themes/light';
+@use './themes/dark';
+@use './utils';
+@use './pages/home';
+@use './pages/gd';
+
+:root {
+  background-color: var(--em-level-0-background);
+  color: var(--em-level-0-color);
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif, Helvetica, Arial;
+  @include dark.theme();
+
+  &[data-theme="light"] {
+    @include light.theme();
+  }
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-height: 100svh;
+}
+
+#main-header, #main-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  min-height: 64px;
+  background-color: var(--em-level-1-background);
+  color: var(--em-level-1-contrast);
+  padding: 1em 1em;
+}
+
+#main-header {
+  position: sticky;
+  top: 0px;
+  .main-header--start {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .5em;
+  }
+
+
+  nav {
+    ul {
+      list-style: none;
+      padding: unset;
+      margin: unset;
+      display: flex;
+      gap: .5em;
+    }
+  }
+}
+
+main {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+#main-footer {
+  position: sticky;
+  bottom: 0px;
+}

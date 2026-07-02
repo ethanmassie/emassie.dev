@@ -1,0 +1,13 @@
+@mixin theme() {
+  // surface colors
+  --em-level-0-background: #282828;
+  --em-level-0-contrast: #fff;
+  --em-level-1-background: #141616;
+  --em-level-1-contrast: #fff;
+  --em-level-2-background: #181818;
+  --em-level-2-contrast: #fff;
+
+  // branding colors
+  --em-primary-color: #c0ffee;
+  --em-primary-color-50pct: #c0ffee80;
+}
