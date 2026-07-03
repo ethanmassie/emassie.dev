@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {{> head }}
+    <style>
+      :root {
+        --em-window-max-width: 70%;
+      }
+    </style>
+  </head>
+
+  <body>
+    {{> header }}
+    <main
+      id="main-content"
+      class="app-content"
+    >
+      <em-window
+        appTitle="Terminal"
+        iconSrc="/terminal-icon.png"
+      >
+        <em-terminal></em-terminal>
+      </em-window>
+    </main>
+    {{> footer }}
+  </body>
+</html>

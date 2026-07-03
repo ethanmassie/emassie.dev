@@ -1,0 +1,54 @@
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+:host {
+  height: 100%;
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  padding: 1em 1em;
+  font-family: monospace;
+}
+
+p {
+  margin: 0;
+}
+
+.terminal--output {
+  margin: unset;
+}
+
+.terminal--input {
+  display: flex;
+  gap: 0.5em;
+  background-color: unset;
+  color: white;
+
+  &:not(:focus-within) .terminal--input-label {
+    animation: blink 1.5s infinite;
+  }
+
+  .terminal--input-field {
+    font-size: 16px;
+    flex: 1 1 0;
+    background: unset;
+    border: unset;
+    color: inherit;
+    outline: none;
+  }
+}
+
+.ls-list {
+  list-style: none;
+}
