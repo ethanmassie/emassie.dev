@@ -1,13 +1,18 @@
 import { mdiClose, mdiWindowMaximize, mdiWindowMinimize } from '@mdi/js';
 import { html, LitElement, nothing, unsafeCSS, type TemplateResult } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import styles from './window.scss?inline';
 import '../icon';
 import baseStyles from '../../styles/base-styles';
+import { when } from 'lit/directives/when.js';
 
 @customElement('em-window')
 export class WindowElement extends LitElement {
   static styles = [unsafeCSS(styles), baseStyles];
+
+  @property({ type: String }) iconSrc?: string;
+
+  @property({ type: String }) appTitle?: string;
 
   protected render(): TemplateResult | typeof nothing {
     return html`
@@ -16,8 +21,25 @@ export class WindowElement extends LitElement {
         class="header"
       >
         <div class="header--start">
-          <slot name="icon"></slot>
-          <slot name="title"></slot>
+          <slot name="icon">
+            ${when(
+              this.iconSrc,
+              () => html`
+                <img
+                  class="header--icon"
+                  src="${this.iconSrc}"
+                />
+              `,
+            )}
+          </slot>
+          <slot name="title">
+            ${when(
+              this.appTitle,
+              () => html`
+                <h2 class="header--title">${this.appTitle}</h2>
+              `,
+            )}
+          </slot>
         </div>
         <div class="header--end">
           <button

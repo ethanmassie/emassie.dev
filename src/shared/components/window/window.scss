@@ -29,11 +29,13 @@
       align-items: center;
     }
 
-    slot[name='icon']::slotted(*) {
+    slot[name='icon']::slotted(*),
+    .header--icon {
       height: 32px;
     }
 
-    slot[name='title']::slotted(*) {
+    slot[name='title']::slotted(*),
+    .header--title {
       font-size: 16px;
     }
 
