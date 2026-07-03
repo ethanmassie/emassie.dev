@@ -1,31 +1,23 @@
 import { mdiClose, mdiWindowMaximize, mdiWindowMinimize } from '@mdi/js';
 import { html, LitElement, nothing, unsafeCSS, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import styles from './window.scss?inline';
-import type { WindowedApp } from './window.types';
+import '../icon';
+import baseStyles from '../../styles/base-styles';
 
 @customElement('em-window')
-export class GdGameElement extends LitElement {
-  static styles = unsafeCSS(styles);
-
-  @property({ type: Object }) app?: WindowedApp;
+export class WindowElement extends LitElement {
+  static styles = [unsafeCSS(styles), baseStyles];
 
   protected render(): TemplateResult | typeof nothing {
-    if (!this.app) {
-      return nothing;
-    }
-
     return html`
       <div
         id="header"
         class="header"
       >
         <div class="header--start">
-          <img
-            class="header--icon"
-            src=${this.app.iconSrc}
-          />
-          <h2 class="header--title">${this.app.title}</h2>
+          <slot name="icon"></slot>
+          <slot name="title"></slot>
         </div>
         <div class="header--end">
           <button
@@ -35,20 +27,14 @@ export class GdGameElement extends LitElement {
               this.classList.toggle('em-window-maximized');
             }}
           >
-            <svg
+            <em-icon
               class="header--max-btn-grow-icon"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path d=${mdiWindowMaximize}></path>
-            </svg>
-            <svg
+              path=${mdiWindowMaximize}
+            ></em-icon>
+            <em-icon
               class="header--max-btn-shrink-icon"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path d=${mdiWindowMinimize}></path>
-            </svg>
+              path=${mdiWindowMinimize}
+            ></em-icon>
           </button>
           <button
             aria-label="Close"
@@ -57,16 +43,10 @@ export class GdGameElement extends LitElement {
               history.back();
             }}
           >
-            <svg
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path d=${mdiClose}></path>
-            </svg>
+            <em-icon path=${mdiClose}></em-icon>
           </button>
         </div>
       </div>
-
       <slot id="outlet"></slot>
     `;
   }
@@ -74,6 +54,6 @@ export class GdGameElement extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'em-window': GdGameElement;
+    'em-window': WindowElement;
   }
 }

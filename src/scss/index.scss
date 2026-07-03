@@ -1,13 +1,14 @@
 @use './themes/light';
 @use './themes/dark';
-@use './utils';
+@use './common';
 @use './components/link-grid';
 
 :root {
-  background-color: var(--em-level-0-background);
-  color: var(--em-level-0-color);
   font-size: 16px;
   font-family: 'Open Sans', sans-serif, Helvetica, Arial;
+  --em-border-radius-s: 0.25em;
+  --em-border-radius-m: 0.5em;
+  --em-border-radius-l: 1em;
   @include dark.theme();
 
   &[data-theme='light'] {
@@ -23,8 +24,10 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow: auto;
   min-height: 100svh;
+  background-color: var(--em-level-0-background);
+  color: var(--em-level-0-contrast);
 }
 
 #main-header,
@@ -55,16 +58,39 @@ body {
       padding: unset;
       margin: unset;
       display: flex;
-      gap: 0.5em;
+      gap: 1em;
     }
   }
 }
 
-main {
+main#main-content {
   flex: 1 1 0;
   display: flex;
   justify-content: center;
   position: relative;
+
+  &.app-content {
+    flex-direction: column;
+    padding: 2em 2em;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1em;
+
+    .app-information {
+      max-width: var(--em-window-max-width);
+
+      section {
+        margin-bottom: 1em;
+      }
+
+      .app-information--badges {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5em;
+        align-items: center;
+      }
+    }
+  }
 }
 
 #main-footer {

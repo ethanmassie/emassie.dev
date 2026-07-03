@@ -15,7 +15,7 @@
     width: var(--_item-width);
     height: var(--_item-height);
     box-sizing: border-box;
-    border-radius: 0.5em;
+    border-radius: var(--em-border-radius-m);
     background: var(--em-level-2-background);
     color: var(--em-level-2-contrast);
     overflow: hidden;
@@ -32,6 +32,11 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
+      padding: 1em 1em;
+
+      span {
+        text-align: center;
+      }
     }
   }
 }

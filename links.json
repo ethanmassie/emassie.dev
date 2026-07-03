@@ -1,14 +1,14 @@
 [
     {
-        "href": "/app/?id=ba_boom",
+        "href": "/app/ba-boom/",
         "thumbnailSrc": "/ba-boom/Ba-Boom.icon.png",
         "title": "BA-BOOM!",
-        "description": ""
+        "description": "A clone of a certain Atari 2600 game"
     },
     {
-        "href": "/app/?id=pyramid",
+        "href": "/app/pyramid/",
         "thumbnailSrc": "/pyramid/pyramid.icon.png",
         "title": "Pyramid",
-        "description": "Pyramid solitaire clone"
+        "description": "A pyramid solitaire clone"
     }
 ]

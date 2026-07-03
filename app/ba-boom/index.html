@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {{> head }}
+    <style>
+      :root {
+        --em-window-max-width: 1000px;
+      }
+    </style>
+  </head>
+
+  <body>
+    {{> header }}
+    <main
+      id="main-content"
+      class="app-content"
+    >
+      <em-window>
+        <img
+          class="header--icon"
+          src="/ba-boom/Ba-Boom.icon.png"
+          slot="icon"
+        />
+        <h2
+          class="header--title"
+          slot="title"
+        >
+          BA-BOOM!
+        </h2>
+        <iframe
+          id="ba-boom-iframe"
+          src="/ba-boom/Ba-Boom.html"
+        ></iframe>
+      </em-window>
+      <div class="app-information">
+        <section>
+          <h3>Description</h3>
+          <p>
+            Oh no! The burglar is at it again dropping bombs on an empty field!
+            It is up to you, three disconnected buckets, to catch all of the
+            bombs before they blow up! Be careful though, each round the speed
+            and number of bombs increases! If you miss a bomb one of your
+            buckets will disappear. The only way to get it back is to score 1000
+            points.
+          </p>
+        </section>
+        <section>
+          <h3>Controls</h3>
+          <ul>
+            <li>Left click: start the round</li>
+            <li>Right click: open the menu</li>
+          </ul>
+        </section>
+        <div class="app-information--badges">
+          <a
+            href="https://github.com/ethanmassie/Ba-Boom"
+            target="_blank"
+          >
+            {{> github-icon }}
+          </a>
+          <em-embed-button iframeSelector="#ba-boom-iframe"></em-embed-button>
+        </div>
+      </div>
+    </main>
+    {{> footer }}
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {{> head }}
+    <style>
+      :root {
+        --em-window-max-width: 1000px;
+      }
+    </style>
+  </head>
+
+  <body>
+    {{> header }}
+    <main
+      id="main-content"
+      class="app-content"
+    >
+      <em-window style="height: 100%">
+        <img
+          class="header--icon"
+          src="/pyramid/pyramid.icon.png"
+          slot="icon"
+        />
+        <h2
+          class="header--title"
+          slot="title"
+        >
+          Pyramid
+        </h2>
+        <iframe
+          id="pyramid-iframe"
+          src="/pyramid/pyramid.html"
+        ></iframe>
+      </em-window>
+      <div class="app-information">
+        <section>
+          <h3>Description</h3>
+          <p>
+            Match cards that add up to 13 to clear them (kings clear by
+            themselves). You win if the pyramid is empty. You lose if you cycle
+            through the deck 3 times.
+          </p>
+        </section>
+        <section>
+          <h3>Controls</h3>
+          <p>It's solitaire, you can figure it out.</p>
+        </section>
+        <div class="app-information--badges">
+          <a
+            href="https://github.com/ethanmassie/godot-pyramid-solitaire"
+            target="_blank"
+          >
+            {{> github-icon }}
+          </a>
+          <em-embed-button iframeSelector="#pyramid-iframe"></em-embed-button>
+        </div>
+      </div>
+    </main>
+    {{> footer }}
+  </body>
+</html>
