@@ -70,7 +70,7 @@ export const clear: ExecutableFn = (term, _fs, _args) => {
 
 export const execNavigate = (route: string): ExecutableFn => {
   return () => {
-    location.replace(route);
+    location.href = route;
   };
 };
 
