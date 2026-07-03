@@ -74,6 +74,10 @@ export const execNavigate = (route: string): ExecutableFn => {
   };
 };
 
+export const exitTerminal: ExecutableFn = () => {
+  history.back();
+};
+
 export const executables: Omit<Executable, 'parent'>[] = [
   {
     type: 'exec',
@@ -104,5 +108,10 @@ export const executables: Omit<Executable, 'parent'>[] = [
     type: 'exec',
     name: 'pyramid',
     exec: execNavigate('/app/pyramid/'),
+  },
+  {
+    type: 'exec',
+    name: 'exit',
+    exec: exitTerminal,
   },
 ];
