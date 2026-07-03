@@ -38,7 +38,8 @@ export default {
         main: resolve(import.meta.dirname, 'index.html'),
         about: resolve(import.meta.dirname, 'about/index.html'),
         baBoom: resolve(import.meta.dirname, 'app/ba-boom/index.html'),
-        pyramid: resolve(import.meta.dirname, 'app/pyramid/index.html')
+        pyramid: resolve(import.meta.dirname, 'app/pyramid/index.html'),
+        terminal: resolve(import.meta.dirname, 'app/terminal/index.html'),
       },
     },
   }
