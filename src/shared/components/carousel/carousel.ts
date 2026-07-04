@@ -113,3 +113,9 @@ export class CarouselElement extends LitElement {
     return this.items[nextIndex] || this.scrolledToItem;
   }
 }
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'em-carousel': CarouselElement;
+  }
+}
