@@ -4,8 +4,6 @@
   background: var(--em-level-1-background);
   border: 2px solid var(--em-level-1-background);
   border-top: none;
-  max-width: var(--em-window-max-width);
-  max-height: var(--em-window-max-height);
   height: 100%;
   width: 100%;
   border-radius: var(--em-border-radius-m);
@@ -15,12 +13,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-height: 32px;
+    min-height: 40px;
+    height: fit-content;
     overflow: hidden;
     background: var(--em-level-1-background);
     color: var(--em-level-1-contrast);
     box-sizing: border-box;
-    padding: 0 0.5em;
+    padding: 0.25em 0.5em;
 
     .header--start,
     .header--end {

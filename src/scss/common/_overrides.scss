@@ -24,3 +24,8 @@ button {
   gap: 0.5em;
   cursor: pointer;
 }
+
+ul,
+ol {
+  margin: unset;
+}

@@ -4,10 +4,11 @@
     {{> head }}
     <title>emassie.dev | About</title>
     <style>
+      :root {
+        --em-max-content-width: 800px;
+      }
       #main-content {
-        max-width: 800px;
         align-items: flex-start;
-        align-self: center;
       }
     </style>
   </head>
@@ -25,11 +26,10 @@
       <h2>Technical Bits</h2>
       <p>
         This site is built as a static site using Vite and Handlebars. I use Lit
-        to make web components like the app window and carousel. The games
-        are mostly built with Godot and embedded using iframes. You can embed
-        these games in your own website with an iframe. When possible a page
-        will have an "embed" button that writes an html snippet to your
-        clipboard.
+        to make web components like the app window and carousel. The games are
+        mostly built with Godot and embedded using iframes. You can embed these
+        games in your own website with an iframe. When possible a page will have
+        an "embed" button that writes an html snippet to your clipboard.
       </p>
       <h2>Attribution</h2>
       <ul>
@@ -60,27 +60,14 @@
           </a>
           by elvgames
         </li>
+        <li>
+          Github 88x31 Icon from
+          <a href="https://github.com/ktwrd/88x31">ktwrd/88x31</a>
+        </li>
       </ul>
       <h2>Contact</h2>
       <a href="mailto:admin@emassie.dev">admin@emassie.dev</a>
     </main>
-    <footer id="main-footer">
-      <div class="horizontal-container">
-        <a
-          class="link-88-31"
-          href="https://www.rockwood.dev"
-          target="_blank"
-        >
-          <img src="https://www.rockwood.dev/assets/button-88x31.gif">
-        </a>
-        <a
-          href="https://github.com/ethanmassie/emassie.dev"
-          target="_blank"
-        >
-          {{>github-icon}}
-        </a>
-      </div>
-    </footer>
     {{> footer }}
   </body>
 </html>

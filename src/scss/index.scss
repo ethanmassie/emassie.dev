@@ -11,10 +11,6 @@
   --em-border-radius-m: 0.5em;
   --em-border-radius-l: 1em;
   @include dark.theme();
-
-  &[data-theme='light'] {
-    @include light.theme();
-  }
 }
 
 body {
@@ -37,10 +33,9 @@ body {
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  min-height: 64px;
   background-color: var(--em-level-1-background);
   color: var(--em-level-1-contrast);
-  padding: 1em 1em;
+  padding: 0.5em 0.5em;
 }
 
 #main-header {
@@ -69,24 +64,26 @@ body {
   padding: 2em 2em;
   display: flex;
   flex-direction: column;
+  align-self: center;
   align-items: center;
+  width: 100%;
+  box-sizing: border-box;
   gap: 1em;
-  position: relative;
+  max-width: var(--em-max-content-width, none);
+}
 
-  &.app-content {
-    .app-information {
-      max-width: var(--em-window-max-width);
+:where(.app-content) {
+  max-width: var(--em-max-content-width, 950px);
+  .app-information {
+    section {
+      margin-bottom: 1em;
+    }
 
-      section {
-        margin-bottom: 1em;
-      }
-
-      .app-information--badges {
-        display: flex;
-        justify-content: flex-end;
-        gap: 0.5em;
-        align-items: center;
-      }
+    .app-information--badges {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5em;
+      align-items: center;
     }
   }
 }

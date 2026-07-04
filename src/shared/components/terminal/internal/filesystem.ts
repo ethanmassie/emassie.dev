@@ -7,7 +7,7 @@ type BaseFile = {
 
 export type TextFile = BaseFile & {
   type: 'text_file';
-  contents: string;
+  contents: () => string;
 };
 
 export type ExecutableFn = (
@@ -67,14 +67,35 @@ export function addChild(dir: Dir, node: Omit<FsNode, 'parent'>): Dir {
 }
 
 export function buildDir(
-  dir: Omit<Dir, 'parent'>,
+  name: string,
   children: Omit<FsNode, 'parent'>[],
+  parent?: Dir,
 ): Dir {
+  const dir: Dir = {
+    type: 'dir',
+    name,
+    parent,
+    children: [],
+  };
   children.forEach((child) => {
     addChild(dir as Dir, child);
   });
 
   return dir as Dir;
+}
+
+export function buildTextFile(
+  name: string,
+  contents: string | (() => string),
+  parent?: Dir,
+): TextFile {
+  const contentsFn = typeof contents === 'string' ? () => contents : contents;
+  return {
+    type: 'text_file',
+    name,
+    contents: contentsFn,
+    parent,
+  };
 }
 
 export function findChild(dir: Dir, name: string) {

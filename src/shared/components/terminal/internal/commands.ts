@@ -2,6 +2,7 @@ import { html } from 'lit';
 import {
   findFile,
   getPath,
+  type Dir,
   type Executable,
   type ExecutableFn,
 } from './filesystem';
@@ -74,44 +75,57 @@ export const execNavigate = (route: string): ExecutableFn => {
   };
 };
 
+export const cat: ExecutableFn = (term, fs, [path]) => {
+  const file = findFile(fs, path);
+  if (!file) {
+    term.printLn(`No such file ${path}`);
+    return;
+  }
+
+  if (file?.type !== 'text_file') {
+    term.printLn('File must be a text file');
+    return;
+  }
+
+  term.print(file.contents());
+};
+
+export const cowSay: ExecutableFn = (term, _fs, args) => {
+  const message = args.join(' ') || 'Type your message after the command';
+  term.print(String.raw`      ${'_'.repeat(message.length + 4)}
+      < ${message} >
+      ${'-'.repeat(message.length + 4)}
+          \   ^__^
+           \  (oo)\_______
+              (__)\       )\/\
+                  ||----w |
+                  ||     ||`);
+};
+
 export const exitTerminal: ExecutableFn = () => {
   history.back();
 };
 
+export function buildExec(
+  name: string,
+  exec: ExecutableFn,
+  parent?: Dir,
+): Executable {
+  return {
+    type: 'exec',
+    name,
+    exec,
+    parent,
+  };
+}
+
 export const executables: Omit<Executable, 'parent'>[] = [
-  {
-    type: 'exec',
-    name: 'ls',
-    exec: ls,
-  },
-  {
-    type: 'exec',
-    name: 'pwd',
-    exec: pwd,
-  },
-  {
-    type: 'exec',
-    name: 'cd',
-    exec: cd,
-  },
-  {
-    type: 'exec',
-    name: 'clear',
-    exec: clear,
-  },
-  {
-    type: 'exec',
-    name: 'ba-boom',
-    exec: execNavigate('/app/ba-boom/'),
-  },
-  {
-    type: 'exec',
-    name: 'pyramid',
-    exec: execNavigate('/app/pyramid/'),
-  },
-  {
-    type: 'exec',
-    name: 'exit',
-    exec: exitTerminal,
-  },
+  buildExec('ls', ls),
+  buildExec('pwd', pwd),
+  buildExec('cd', cd),
+  buildExec('clear', clear),
+  buildExec('ba-boom', execNavigate('/app/ba-boom/')),
+  buildExec('pyramid', execNavigate('/app/pyramid/')),
+  buildExec('exit', exitTerminal),
+  buildExec('cat', cat),
 ];

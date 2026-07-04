@@ -12,6 +12,12 @@ export class TerminalElement extends LitElement {
 
   @query('#output') outputEl!: HTMLDivElement;
 
+  @query('#input') inputEl!: HTMLInputElement;
+
+  private _commandHistory: string[] = [];
+  private _commandHistoryPointer?: number;
+  private _commandBackup?: string;
+
   protected render(): unknown {
     return html`
       <div
@@ -21,6 +27,8 @@ export class TerminalElement extends LitElement {
       <label class="terminal--input">
         <span class="terminal--input-label">></span>
         <input
+          id="input"
+          autocomplete="off"
           class="terminal--input-field"
           @keydown=${this._handleKey.bind(this)}
         />
@@ -38,11 +46,21 @@ export class TerminalElement extends LitElement {
     this._appendOutput(lineEl);
   }
 
+  print(str: string) {
+    const pre = document.createElement('pre');
+    pre.innerText = str;
+    this._appendOutput(pre);
+  }
+
   printRichText(renderable: unknown) {
     const target = document.createElement('div');
     target.style.display = 'contents';
     render(renderable, target);
     this._appendOutput(target);
+  }
+
+  private _clearInput() {
+    this.inputEl.value = '';
   }
 
   private _appendOutput(el: Element) {
@@ -55,16 +73,63 @@ export class TerminalElement extends LitElement {
   }
 
   private _handleKey(e: KeyboardEvent) {
-    const input = e.target as HTMLInputElement;
-    if (e.key == 'Enter') {
-      e.preventDefault();
-      this._processInput(input.value);
-      input.value = '';
+    switch (e.key) {
+      case 'Enter':
+        this._processInput(this.inputEl.value);
+        this._clearInput();
+        break;
+      case 'ArrowUp':
+        this._stepThroughHistory('up');
+        break;
+      case 'ArrowDown':
+        this._stepThroughHistory('down');
+        break;
+      default:
+        return;
     }
+    e.preventDefault();
+  }
+
+  private _stepThroughHistory(direction: 'up' | 'down') {
+    if (this._commandHistory.length === 0) {
+      return;
+    }
+
+    if (
+      direction === 'down' &&
+      this._commandHistoryPointer === this._commandHistory.length - 1
+    ) {
+      this.inputEl.value = this._commandBackup || '';
+      return;
+    }
+
+    if (this._commandHistoryPointer === undefined) {
+      if (direction === 'up') {
+        this._commandBackup = this.inputEl.value;
+        this._commandHistoryPointer = this._commandHistory.length - 1;
+      } else {
+        return;
+      }
+    } else {
+      const delta = direction === 'up' ? -1 : 1;
+      this._commandHistoryPointer = Math.min(
+        Math.max(0, this._commandHistoryPointer + delta),
+        this._commandHistory.length - 1,
+      );
+    }
+
+    const historyValue =
+      this._commandHistory[this._commandHistoryPointer] || '';
+    this.inputEl.value = historyValue;
   }
 
   private _processInput(inputValue: string) {
-    this.printLn(`> ${inputValue}`);
+    this._commandHistory.push(inputValue);
+    this._commandHistoryPointer = undefined;
+    this.printRichText(html`
+      <span class="printed-cursor">></span>
+      ${inputValue}
+    `);
     const parts = inputValue.split(' ');
     const command = parts[0];
     const args = parts.slice(1);
