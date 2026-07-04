@@ -10,6 +10,7 @@ p {
 
 a,
 a:visited {
+  height: fit-content;
   color: var(--em-primary-color);
 
   &:hover {
