@@ -1,20 +1,20 @@
 [
-    {
-        "href": "/app/ba-boom/",
-        "thumbnailSrc": "/ba-boom/Ba-Boom.icon.png",
-        "title": "BA-BOOM!",
-        "description": "A clone of a certain Atari 2600 game"
-    },
-    {
-        "href": "/app/pyramid/",
-        "thumbnailSrc": "/pyramid/pyramid.icon.png",
-        "title": "Pyramid",
-        "description": "A pyramid solitaire clone"
-    },
-    {
-        "href": "/app/terminal/",
-        "thumbnailSrc": "/terminal-icon.png",
-        "title": "Terminal",
-        "description": "A terminal simulator"
-    }
+  {
+    "href": "/app/ba-boom/",
+    "thumbnailSrc": "/ba-boom/Ba-Boom.icon.png",
+    "title": "BA-BOOM!",
+    "description": "A clone of a certain Atari 2600 game"
+  },
+  {
+    "href": "/app/pyramid/",
+    "thumbnailSrc": "/pyramid/pyramid.icon.png",
+    "title": "Pyramid",
+    "description": "A pyramid solitaire clone"
+  },
+  {
+    "href": "/app/terminal/",
+    "thumbnailSrc": "/terminal-icon.png",
+    "title": "Terminal",
+    "description": "A terminal simulator"
+  }
 ]
