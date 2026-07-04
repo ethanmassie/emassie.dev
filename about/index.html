@@ -3,11 +3,78 @@
   <head>
     {{> head }}
     <title>emassie.dev | About</title>
+    <style>
+      main#main-content {
+        max-width: 800px;
+        align-items: flex-start;
+        align-self: center;
+      }
+    </style>
   </head>
 
   <body>
     {{> header }}
-    <main id="main-content"></main>
+    <main id="main-content">
+      <h2>Overview</h2>
+      <p>
+        This is my personal website. I have been a professional frontend
+        developer for 7+ years. I'm using this to house various projects and
+        other things I'm interested in. Nothing here has been written with an
+        LLM. This is all organic slop.
+      </p>
+      <h2>Technical Bits</h2>
+      <p>
+        This site is built as a static site using Vite and Handlebars. I use Lit
+        to make web components like the app window and carousel. The games
+        are mostly built with Godot and embedded using iframes. You can embed
+        these games in your own website with an iframe. When possible a page
+        will have an "embed" button that writes an html snippet to your
+        clipboard.
+      </p>
+      <h2>Attribution</h2>
+      <ul>
+        <li>
+          Terminal Icon by paomedia (Arnaud) on
+          <a href="https://icon-icons.com/authors/143-paomedia-arnaud">
+            Icon-Icons.com
+          </a>
+        </li>
+        <li>
+          BA-BOOM! Sound effects were created with the
+          <a href="https://musical-artifacts.com/artifacts/2164">
+            Atari 2600 Soundfont
+          </a>
+          by HeeminTV
+        </li>
+        <li>
+          Pyramid uses the
+          <a href="https://intergenic.itch.io/godot-theme-soft-retro">
+            Soft Retro Godot theme
+          </a>
+          by intergenic
+        </li>
+        <li>
+          Pyramid uses
+          <a href="https://elvgames.itch.io/playing-cards-pixelart-asset-pack">
+            Playing Cards Pixelart Asset Pack
+          </a>
+          by elvgames
+        </li>
+      </ul>
+      <h2>Contact</h2>
+      <a href="mailto:admin@emassie.dev">admin@emassie.dev</a>
+    </main>
+    <footer id="main-footer">
+      <div></div>
+      <div>
+        <a
+          href="https://github.com/ethanmassie/emassie.dev"
+          target="_blank"
+        >
+          {{>github-icon}}
+        </a>
+      </div>
+    </footer>
     {{> footer }}
   </body>
 </html>
