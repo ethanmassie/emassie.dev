@@ -13,6 +13,10 @@ export class IconElement extends LitElement {
       align-items: center;
       justify-content: center;
     }
+
+    svg {
+      fill: currentColor;
+    }
   `;
 
   @property({ type: String }) path?: string;

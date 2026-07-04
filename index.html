@@ -1,27 +1,38 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    {{> head }}
+  </head>
 
-<head>
-  {{> head }}
-</head>
+  <body>
+    {{> header }}
+    <main id="main-content">
+      <h2>Apps</h2>
+      <nav class="link-grid">
+        {{#each links}}
+        <a
+          href="{{this.href}}"
+          class="link-grid--item"
+        >
+          <img
+            class="link-grid--item-thumbnail"
+            src="{{this.thumbnailSrc}}"
+          />
+          <div class="link-grid--item-info">
+            <span>{{this.title}}</span>
+            <span>{{this.description}}</span>
+          </div>
+        </a>
+        {{/each}}
+      </nav>
 
-<body>
-  {{> header }}
-  <main id="main-content">
-    <div class="link-grid">
-      {{#each links}}
-      <a href="{{this.href}}" class="link-grid--item">
-        <img class="link-grid--item-thumbnail" src="{{this.thumbnailSrc}}">
-        <div class="link-grid--item-info">
-          <span>{{this.title}}</span>
-          <span>{{this.description}}</span>
-        </div>
-      </a>
-      {{/each}}
-    </div>
-
-  </main>
-  {{> footer }}
-</body>
-
+      <h2>Cats</h2>
+      <em-carousel id="cat-carousel">
+        {{#each catFiles}}
+        <img src="/cats/{{this}}" />
+        {{/each}}
+      </em-carousel>
+    </main>
+    {{> footer }}
+  </body>
 </html>
