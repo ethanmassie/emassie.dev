@@ -89,13 +89,11 @@ export class CarouselElement extends LitElement {
 
   private _findNextOverflowingItem(side: 'left' | 'right') {
     const scrollAreaRect = this.scrollArea.getBoundingClientRect();
-    console.log(scrollAreaRect);
     const _items = side === 'left' ? this.items.toReversed() : this.items;
 
     const closest = _items.find((item) => {
       const itemRect = item.getBoundingClientRect();
       if (side === 'left') {
-        console.log(itemRect.left);
         return itemRect.left <= scrollAreaRect.left;
       } else {
         return itemRect.right >= scrollAreaRect.right;
