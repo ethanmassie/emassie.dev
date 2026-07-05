@@ -72,6 +72,11 @@ body {
   max-width: var(--em-max-content-width, none);
 }
 
+:where(#main-content.text-content) {
+  align-items: flex-start;
+  --em-max-content-width: 800px;
+}
+
 :where(.app-content) {
   max-width: var(--em-max-content-width, 950px);
   .app-information {

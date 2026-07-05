@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {{> head }}
+    <title>emassie.dev | Music</title>
+    <style>
+      .listenbrainz-section {
+        align-self: center;
+      }
+      .listenbrainz-section h4 {
+        text-align: center;
+        margin-bottom: 1em;
+      }
+
+      .listenbrainz-template svg {
+        width: 100%;
+        height: fit-content;
+        max-width: 600px;
+        max-height: 600px;
+      }
+    </style>
+  </head>
+
+  <body>
+    {{> header }}
+    <main
+      id="main-content"
+      class="text-content"
+    >
+      <h2>Music</h2>
+      <p>
+        A few years back I left Spotify. Annual price increases and a general
+        disdain for the platform drove my decision. Since then I've gone back to
+        purchasing music (either CDs or DRM free digital files). I use the Open
+        Subsonic server Navidrome to give myself the same experience of
+        streaming but with my currated collection. My server is private to my
+        LAN. I download the music I want to listen to using a subsonic client.
+        This isn't too dissimilar to my experience on Spotify since I never
+        streamed music on mobile data then either.
+      </p>
+      <p>
+        Moving off of a music streaming platform I've found I appreciate my
+        music a lot more. On Spotify I often just shuffled my liked songs or
+        listened to discover weekly. Now I tend to listen to albums front to
+        back. Especially with older albums that targeted vinyl or CD this is my
+        favorite way to listen to music. The artists made the album with a
+        particular order in mind and knew people would mostly listen to it in
+        order. I'm not sure how true this is with music created with streaming
+        in mind.
+      </p>
+      <p>
+        Spotify has continually proven my decision was correct. Promotion of AI
+        generated audio, their disregard for artists, and general platform
+        degredation make me happy to continue consuming music my way.
+      </p>
+
+      <h3>My Music Stack</h3>
+      <ul>
+        <li>
+          Server:
+          <a
+            href="https://www.navidrome.org/"
+            target="_blank"
+          >
+            Navidrome
+          </a>
+        </li>
+        <li>
+          Clients:
+          <a
+            href="https://github.com/argie-w/Arpeggi-App"
+            target="_blank"
+          >
+            Arpeggi (iOS)
+          </a>
+          ,
+          <a
+            href="https://www.symfonium.app/"
+            target="_blank"
+          >
+            Symfonium (Android)
+          </a>
+        </li>
+        <li>
+          Stats:
+          <a
+            href="https://musicbrainz.org/user/salad_dinner/"
+            target="_blank"
+          >
+            Musicbrainz
+          </a>
+          and
+          <a
+            href="https://listenbrainz.org/user/salad_dinner/"
+            target="_blank"
+          >
+            Listenbrainz
+          </a>
+        </li>
+        <li>
+          Discovery:
+          <a
+            href="https://www.gnoosic.com/"
+            target="_blank"
+          >
+            Gnoosic
+          </a>
+        </li>
+        <li>
+          Stores:
+          <a
+            href=" https://bandcamp.com/salad_dinner"
+            target="_blank"
+          >
+            Bandcamp
+          </a>
+        </li>
+      </ul>
+
+      <h3>Listenbrainz Most Listened</h3>
+      <section class="listenbrainz-section">
+        <h4 id="this-month-listens-header">This Month</h4>
+        <em-remote-template
+          class="listenbrainz-template"
+          src="/lb/this-month.html"
+        ></em-remote-template>
+      </section>
+
+      <section class="listenbrainz-section">
+        <h4 id="this-year-listens-header">This Year</h4>
+        <em-remote-template
+          class="listenbrainz-template"
+          src="/lb/this-year.html"
+        ></em-remote-template>
+      </section>
+
+      <section class="listenbrainz-section">
+        <h4 id="all-time-listens-header">All Time</h4>
+        <em-remote-template
+          class="listenbrainz-template"
+          src="/lb/all-time-listens.html"
+        ></em-remote-template>
+      </section>
+    </main>
+    {{> footer }}
+  </body>
+</html>
