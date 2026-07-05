@@ -1,6 +1,9 @@
 import type { TerminalElement } from '../terminal';
 
+export type FileType = 'exec' | 'dir' | 'text_file';
+
 type BaseFile = {
+  type: FileType;
   name: string;
   parent: Dir | undefined;
 };
@@ -10,11 +13,16 @@ export type TextFile = BaseFile & {
   contents: () => string;
 };
 
+export type ExecutableResult = {
+  code: number;
+  msg?: string;
+};
+
 export type ExecutableFn = (
   terminal: TerminalElement,
   fs: FileSystem,
   args: string[],
-) => void;
+) => ExecutableResult;
 
 export type Executable = BaseFile & {
   type: 'exec';

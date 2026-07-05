@@ -2,6 +2,10 @@
 <html lang="en">
   <head>
     {{> head }}
+    <script
+      type="module"
+      src="/src/pages/terminal/index.ts"
+    ></script>
     <title>emassie.dev | Terminal</title>
   </head>
 
@@ -17,6 +21,17 @@
       >
         <em-terminal></em-terminal>
       </em-window>
+      <div class="app-information">
+        <section>
+          <h3>Description</h3>
+          <p>
+            Simulation of a UNIX style terminal. Basic commands exist under
+            /bin. Use ls and cd to discover the filesystem. Supports piping
+            commands and using up and down arrow keys to cycle the command
+            history.
+          </p>
+        </section>
+      </div>
     </main>
     {{> footer }}
   </body>

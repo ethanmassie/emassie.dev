@@ -1,7 +1,7 @@
 import { html, LitElement, unsafeCSS, render } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
 import styles from './terminal.scss?inline';
-import { findFile } from './internal/filesystem';
+import { findFile, type ExecutableResult } from './internal/filesystem';
 import { makeFS } from './internal/default-fs';
 
 @customElement('em-terminal')
@@ -123,23 +123,45 @@ export class TerminalElement extends LitElement {
     this.inputEl.value = historyValue;
   }
 
+  private _printInput(value: string) {
+    this.printRichText(html`
+      <span class="printed-cursor">></span>
+      ${value}
+    `);
+  }
+
   private _processInput(inputValue: string) {
     this._commandHistory.push(inputValue);
     this._commandHistoryPointer = undefined;
-    this.printRichText(html`
-      <span class="printed-cursor">></span>
-      ${inputValue}
-    `);
-    const parts = inputValue.split(' ');
-    const command = parts[0];
-    const args = parts.slice(1);
+    this._printInput(inputValue);
 
-    const executable = findFile(this._fs, command, 'exec', true);
-    if (!executable) {
-      this.printLn('No such file or directory');
+    const result = inputValue.split('|').reduce(({ code, msg }, input) => {
+      const parts = input.trim().split(' ');
+      const command = parts[0];
+      const args = parts.slice(1);
+
+      if (!isNaN(code) && code !== 0) {
+        return { code, msg };
+      }
+
+      if (msg) {
+        args.push(msg);
+      }
+
+      const executable = findFile(this._fs, command, 'exec', true);
+      if (!executable) {
+        return { code: 1, msg: 'No such file or directory' };
+      }
+
+      return executable.exec(this, this._fs, args);
+    }, {} as ExecutableResult);
+
+    if (!result || !result.msg) {
       return;
     }
 
-    executable.exec(this, this._fs, args);
+    if (result.msg) {
+      this.print(result.msg);
+    }
   }
 }

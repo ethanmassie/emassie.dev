@@ -1,98 +1,106 @@
-import { html } from 'lit';
 import {
   findFile,
   getPath,
   type Dir,
   type Executable,
   type ExecutableFn,
+  type ExecutableResult,
+  type FileType,
 } from './filesystem';
-import { map } from 'lit/directives/map.js';
-import { choose } from 'lit/directives/choose.js';
 
-export const ls: ExecutableFn = (term, fs, args) => {
+function showFileType(type: FileType) {
+  switch (type) {
+    case 'exec':
+      return 'x';
+    case 'dir':
+      return 'd';
+    case 'text_file':
+      return 'f';
+    default:
+      return '?';
+  }
+}
+
+function success(msg?: string): ExecutableResult {
+  return {
+    code: 0,
+    msg,
+  };
+}
+
+function error(msg?: string, code = 1): ExecutableResult {
+  return {
+    code,
+    msg,
+  };
+}
+
+export const ls: ExecutableFn = (_term, fs, args) => {
   let dir = fs.cwd;
   if (args[0]) {
     const argDir = findFile(fs, args[0], 'dir', false);
     if (argDir === undefined) {
-      term.printLn('No such directory ' + argDir);
-      return;
+      return error('No such directory ' + argDir);
     }
     dir = argDir;
   }
   const files = dir.children.sort((a, b) => a.name.localeCompare(b.name));
 
-  term.printRichText(html`
-    <ul class="ls-list">
-      ${map(
-        files,
-        (file) => html`
-          <li>
-            ${choose(file.type, [
-              ['exec', () => 'e'],
-              ['dir', () => 'd'],
-              ['text_file', () => 'f'],
-            ])}
-            - ${file.name}
-          </li>
-        `,
-      )}
-    </ul>
-  `);
+  return success(
+    files.map((f) => `${showFileType(f.type)} - ${f.name}`).join('\n'),
+  );
 };
 
-export const pwd: ExecutableFn = (term, fs, _args) => {
-  term.printLn(getPath(fs.cwd));
+export const pwd: ExecutableFn = (_term, fs, _args) => {
+  return success(getPath(fs.cwd));
 };
 
-export const cd: ExecutableFn = (term, fs, args) => {
+export const cd: ExecutableFn = (_term, fs, args) => {
   const target = args[0];
   if (!target) {
-    term.printLn('Path required');
-    return;
+    return error('Path required');
   }
 
   const file = findFile(fs, target);
   if (!file) {
-    term.printLn('No such directory ' + target);
-    return;
+    return error('No such directory ' + target);
   }
   if (file?.type !== 'dir') {
-    term.printLn(`${target} is not a directory`);
-    return;
+    return error(`${target} is not a directory`);
   }
   fs.cwd = file;
 
-  term.printLn(getPath(fs.cwd));
+  return success(getPath(fs.cwd));
 };
 
 export const clear: ExecutableFn = (term, _fs, _args) => {
   term.clear();
+  return success();
 };
 
 export const execNavigate = (route: string): ExecutableFn => {
   return () => {
     location.href = route;
+    return success();
   };
 };
 
-export const cat: ExecutableFn = (term, fs, [path]) => {
+export const cat: ExecutableFn = (_term, fs, [path]) => {
   const file = findFile(fs, path);
   if (!file) {
-    term.printLn(`No such file ${path}`);
-    return;
+    return error(`No such file ${path}`);
   }
 
   if (file?.type !== 'text_file') {
-    term.printLn('File must be a text file');
-    return;
+    return error('File must be a text file');
   }
 
-  term.print(file.contents());
+  return success(file.contents());
 };
 
-export const cowSay: ExecutableFn = (term, _fs, args) => {
+export const cowSay: ExecutableFn = (_term, _fs, args) => {
   const message = args.join(' ') || 'Type your message after the command';
-  term.print(String.raw`      ${'_'.repeat(message.length + 4)}
+  return success(String.raw`      ${'_'.repeat(message.length + 4)}
       < ${message} >
       ${'-'.repeat(message.length + 4)}
           \   ^__^
@@ -104,6 +112,11 @@ export const cowSay: ExecutableFn = (term, _fs, args) => {
 
 export const exitTerminal: ExecutableFn = () => {
   history.back();
+  return success();
+};
+
+export const echo: ExecutableFn = (_term, _fs, args) => {
+  return success(args.join(' '));
 };
 
 export function buildExec(
@@ -128,4 +141,5 @@ export const executables: Omit<Executable, 'parent'>[] = [
   buildExec('pyramid', execNavigate('/app/pyramid/')),
   buildExec('exit', exitTerminal),
   buildExec('cat', cat),
+  buildExec('echo', echo),
 ];
