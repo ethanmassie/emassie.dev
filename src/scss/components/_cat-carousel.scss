@@ -8,3 +8,26 @@
 #cat-carousel:not(:defined) {
   display: none;
 }
+
+.cat-img-clone {
+  height: 80vh !important;
+  max-height: 100vh;
+  width: auto !important;
+  top: 50% !important;
+  bottom: unset !important;
+  left: 50% !important;
+  right: unset !important;
+  translate: -50% -50%;
+  transition: all ease-in 0.5s;
+  z-index: 1000;
+}
+
+.cat-img-backdrop {
+  background: #14141479;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
