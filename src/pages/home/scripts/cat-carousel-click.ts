@@ -1,5 +1,6 @@
 const ANIMATION_MS = 500;
-const DELAY_MS = 50;
+const DELAY_MS = 10;
+const pxStr = (v: unknown) => `${v}px`;
 
 (() => {
   const html = document.querySelector('html');
@@ -18,7 +19,6 @@ const DELAY_MS = 50;
     }
     const rect = t.getBoundingClientRect();
     const clone = t.cloneNode() as HTMLImageElement;
-    const pxStr = (v: unknown) => `${v}px`;
     clone.style.position = 'absolute';
     clone.style.top = pxStr(rect.top);
     clone.style.left = pxStr(rect.left);
@@ -30,9 +30,14 @@ const DELAY_MS = 50;
     backdrop.classList.add('cat-img-backdrop');
 
     const cleanup = (e: Event) => {
+      if (e instanceof KeyboardEvent && e.key !== 'Escape') {
+        return;
+      }
+
       e.preventDefault();
       e.stopPropagation();
-      html.removeEventListener('keydown', cleanupOnEsc);
+      html.removeEventListener('keydown', cleanup);
+      backdrop.removeEventListener('click', cleanup);
       backdrop.remove();
       clone.classList.remove('cat-img-clone');
       // wait for animation to finish
@@ -41,18 +46,8 @@ const DELAY_MS = 50;
         document.body.inert = false;
       }, ANIMATION_MS);
     };
-    backdrop.addEventListener('click', cleanup);
-
-    const cleanupOnEsc = (e: KeyboardEvent) => {
-      if (e.key !== 'Escape') {
-        return;
-      }
-
-      cleanup(e);
-    };
 
     html.append(clone, backdrop);
-    html.addEventListener('keydown', cleanupOnEsc);
     document.body.inert = true;
 
     // delay style changes to ensure transitions occur
@@ -60,12 +55,11 @@ const DELAY_MS = 50;
       clone.classList.add('cat-img-clone');
     }, DELAY_MS);
 
-    // determine what the auto width was calculated and set it as a custom property so the transition out can animate the width shrinking
-    setTimeout(
-      () => {
-        clone.style.setProperty('--_auto-width', pxStr(clone.clientWidth));
-      },
-      ANIMATION_MS + DELAY_MS + DELAY_MS,
-    );
+    // determine what the auto width was calculated to be and set it as a custom property so the transition out can animate the width shrinking
+    setTimeout(() => {
+      clone.style.setProperty('--_auto-width', pxStr(clone.clientWidth));
+      backdrop.addEventListener('click', cleanup);
+      html.addEventListener('keydown', cleanup);
+    }, ANIMATION_MS + DELAY_MS);
   });
 })();
