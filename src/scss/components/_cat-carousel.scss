@@ -11,14 +11,12 @@
 
 .cat-img-clone {
   height: 80vh !important;
-  max-height: 100vh;
-  width: auto !important;
+  max-height: 80vh;
+  width: var(--_auto-width, auto) !important;
+  max-width: 80vw;
   top: 50% !important;
-  bottom: unset !important;
   left: 50% !important;
-  right: unset !important;
   translate: -50% -50%;
-  transition: all ease-in 0.5s;
   z-index: 1000;
 }
 
