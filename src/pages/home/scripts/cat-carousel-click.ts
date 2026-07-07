@@ -1,5 +1,5 @@
 const ANIMATION_MS = 500;
-const DELAY_MS = 10;
+const DELAY_MS = 20;
 const pxStr = (v: unknown) => `${v}px`;
 
 (() => {
@@ -24,10 +24,12 @@ const pxStr = (v: unknown) => `${v}px`;
     clone.style.left = pxStr(rect.left);
     clone.style.height = pxStr(rect.height);
     clone.style.width = pxStr(rect.width);
-    clone.style.transition = `all ease-in-out ${ANIMATION_MS}ms`;
+    clone.style.zIndex = '1000';
+    clone.style.transition = `all ${ANIMATION_MS}ms ease-in-out`;
 
     const backdrop = document.createElement('div');
-    backdrop.classList.add('cat-img-backdrop');
+    backdrop.style.opacity = '0';
+    backdrop.style.transition = `opacity ${ANIMATION_MS}ms ease-in-out allow-discrete`;
 
     const cleanup = (e: Event) => {
       if (e instanceof KeyboardEvent && e.key !== 'Escape') {
@@ -38,10 +40,11 @@ const pxStr = (v: unknown) => `${v}px`;
       e.stopPropagation();
       html.removeEventListener('keydown', cleanup);
       backdrop.removeEventListener('click', cleanup);
-      backdrop.remove();
+      backdrop.style.setProperty('opacity', '0', 'important');
       clone.classList.remove('cat-img-clone');
       // wait for animation to finish
       setTimeout(() => {
+        backdrop.remove();
         clone.remove();
         document.body.inert = false;
       }, ANIMATION_MS);
@@ -53,6 +56,7 @@ const pxStr = (v: unknown) => `${v}px`;
     // delay style changes to ensure transitions occur
     setTimeout(() => {
       clone.classList.add('cat-img-clone');
+      backdrop.classList.add('cat-img-backdrop');
     }, DELAY_MS);
 
     // determine what the auto width was calculated to be and set it as a custom property so the transition out can animate the width shrinking
