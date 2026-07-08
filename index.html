@@ -33,14 +33,14 @@
       <h2>Cats</h2>
       <em-carousel id="cat-carousel">
         {{#each catFiles}}
-        <img src="/cats/{{this}}" />
+        <em-carousel-img
+          can-enlarge
+          alt="A cat picture"
+          src="/cats/{{this}}"
+        ></em-carousel-img>
         {{/each}}
       </em-carousel>
     </main>
     {{> footer }}
-    <script
-      type="module"
-      src="/src/pages/home/index.ts"
-    ></script>
   </body>
 </html>

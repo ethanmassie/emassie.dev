@@ -6,5 +6,5 @@
 .horizontal-container {
   display: flex;
   align-items: center;
-  gap: 0.5em;
+  gap: var(--em-spacing-m);
 }

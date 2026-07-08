@@ -1,6 +1,6 @@
+import { mdiXml } from '@mdi/js';
 import { css, html, LitElement } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { mdiXml } from '@mdi/js';
 import baseStyles from '../../styles/base-styles';
 
 @customElement('em-embed-button')
@@ -19,7 +19,7 @@ export class EmbedButtonElement extends LitElement {
         z-index: -1;
         transition: top ease-in 0.25s;
         height: 24px;
-        padding: 0.5em 0.5em;
+        padding: var(--em-spacing-m);
         border-radius: var(--em-border-radius-m);
       }
 

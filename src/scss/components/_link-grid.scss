@@ -1,8 +1,8 @@
 .link-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, var(--_item-width));
-  gap: 1em;
-  padding: 1em 1em;
+  gap: var(--em-spacing-l);
+  padding: var(--em-spacing-l);
   box-sizing: border-box;
   justify-content: center;
   width: 100%;
@@ -32,7 +32,7 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      padding: 1em 1em;
+      padding: var(--em-spacing-l);
 
       span {
         text-align: center;

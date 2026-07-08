@@ -19,12 +19,12 @@
     background: var(--em-level-1-background);
     color: var(--em-level-1-contrast);
     box-sizing: border-box;
-    padding: 0.25em 0.5em;
+    padding: var(--em-spacing-s) var(--em-spacing-m);
 
     .header--start,
     .header--end {
       display: flex;
-      gap: 0.5em;
+      gap: var(--em-spacing-m);
       align-items: center;
     }
 
@@ -57,8 +57,8 @@
   slot#outlet::slotted(*) {
     flex: 1 1 0;
     border: unset;
-    border-bottom-left-radius: 0.5em;
-    border-bottom-right-radius: 0.5em;
+    border-bottom-left-radius: var(--em-border-radius-m);
+    border-bottom-right-radius: var(--em-border-radius-m);
   }
 }
 

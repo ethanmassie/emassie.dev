@@ -1,0 +1,49 @@
+:host {
+  display: block;
+  height: fit-content;
+  width: fit-content;
+  --_animation-time: 500ms;
+  padding: var(--em-spacing-m);
+}
+
+.carousel-item--wrapper {
+  display: contents;
+}
+
+.carousel-item--modal {
+  margin: unset;
+  padding: unset;
+  border: unset;
+  background: transparent;
+  transition: all var(--_animation-time) ease-in-out;
+  top: var(--_original-top);
+  left: var(--_original-left);
+  outline-offset: var(--em-spacing-m);
+
+  &::backdrop {
+    opacity: 0;
+    transition: opacity var(--_animation-time) ease-in-out;
+  }
+
+  &.full-size {
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+
+    &::backdrop {
+      opacity: 1;
+    }
+  }
+
+  .carousel-item--clone {
+    height: var(--_original-height) !important;
+    width: var(--_original-width) !important;
+    transition: all var(--_animation-time) ease-in-out;
+    &.full-size {
+      height: 80vh !important;
+      max-height: 80vh !important;
+      width: var(--_auto-width, auto) !important;
+      max-width: 80vw !important;
+    }
+  }
+}

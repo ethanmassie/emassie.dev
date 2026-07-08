@@ -12,6 +12,7 @@ a,
 a:visited {
   height: fit-content;
   color: var(--em-primary-color);
+  padding: var(--em-spacing-s) var(--em-spacing-s);
 
   &:hover {
     color: var(--em-primary-color-50pct);
@@ -21,11 +22,15 @@ a:visited {
 button {
   display: flex;
   align-items: center;
-  gap: 0.5em;
+  gap: var(--em-spacing-m);
   cursor: pointer;
 }
 
 ul,
 ol {
   margin: unset;
+}
+
+:where(*:focus-visible) {
+  outline: 2px solid var(--em-primary-color);
 }

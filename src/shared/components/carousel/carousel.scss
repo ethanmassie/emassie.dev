@@ -6,32 +6,26 @@
   width: 100%;
   height: fit-content;
   box-sizing: border-box;
-  padding: 0.5em 3em;
+  padding: var(--em-spacing-m);
+  gap: var(--em-spacing-l);
 }
 
 .carousel-scroll-area {
   display: flex;
   overflow-x: auto;
-  gap: 1em;
+  align-items: center;
   width: 100%;
-
+  padding: var(--em-spacing-m);
   box-sizing: border-box;
   scrollbar-width: none;
+  scroll-padding: var(--em-spacing-l);
 }
 
 .carousel-scroll-btn {
-  position: absolute;
   cursor: pointer;
   height: 80%;
   font-weight: bold;
   background: #1d1d1db5;
   color: #fff;
   border: unset;
-  &.left {
-    left: 0;
-  }
-
-  &.right {
-    right: 0;
-  }
 }

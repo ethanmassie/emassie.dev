@@ -10,7 +10,18 @@
   --em-border-radius-s: 0.25em;
   --em-border-radius-m: 0.5em;
   --em-border-radius-l: 1em;
+  --em-border-radius-xl: 2em;
+
+  --em-spacing-s: 0.25em;
+  --em-spacing-m: 0.5em;
+  --em-spacing-l: 1em;
+  --em-spacing-xl: 2em;
   @include dark.theme();
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
@@ -35,7 +46,7 @@ body {
   box-sizing: border-box;
   background-color: var(--em-level-1-background);
   color: var(--em-level-1-contrast);
-  padding: 0.5em 1em;
+  padding: var(--em-spacing-m) var(--em-spacing-l);
 }
 
 #main-header {
@@ -45,7 +56,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 0.5em;
+    gap: var(--em-spacing-m);
   }
 
   nav {
@@ -54,21 +65,21 @@ body {
       padding: unset;
       margin: unset;
       display: flex;
-      gap: 1em;
+      gap: var(--em-spacing-l);
     }
   }
 }
 
 :where(#main-content) {
   flex: 1 1 0;
-  padding: 2em 2em;
+  padding: var(--em-spacing-xl) var(--em-spacing-xl);
   display: flex;
   flex-direction: column;
   align-self: center;
   align-items: center;
   width: 100%;
   box-sizing: border-box;
-  gap: 1em;
+  gap: var(--em-spacing-l);
   max-width: var(--em-max-content-width, none);
 }
 
@@ -81,13 +92,13 @@ body {
   max-width: var(--em-max-content-width, 950px);
   .app-information {
     section {
-      margin-bottom: 1em;
+      margin-bottom: var(--em-spacing-l);
     }
 
     .app-information--badges {
       display: flex;
       justify-content: flex-end;
-      gap: 0.5em;
+      gap: var(--em-spacing-m);
       align-items: center;
     }
   }
