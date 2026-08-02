@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {{> head }}
+    <title>emassie.dev | Projects</title>
+  </head>
+
+  <body>
+    {{> header }}
+    <div class="secondary-nav-container">
+      {{> secondary-nav }}
+      <div class="secondary-nav-content">
+        <main
+          id="main-content"
+          class="text-content"
+        ></main>
+      </div>
+    </div>
+
+    {{> footer }}
+    <script
+      type="module"
+      src="/src/pages/projects/index.ts"
+    ></script>
+  </body>
+</html>

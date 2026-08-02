@@ -10,6 +10,8 @@ p {
 
 a,
 a:visited {
+  display: inline-block;
+  box-sizing: border-box;
   height: fit-content;
   color: var(--em-primary-color);
   padding: var(--em-spacing-s) var(--em-spacing-s);
@@ -33,4 +35,38 @@ ol {
 
 :where(*:focus-visible) {
   outline: 2px solid var(--em-primary-color);
+}
+
+article {
+  display: flex;
+  flex-direction: column;
+  gap: var(--em-spacing-m);
+  p {
+    text-indent: 2ch;
+  }
+}
+
+details {
+  border: 1px solid black;
+  border-radius: var(--em-border-radius-m);
+  box-sizing: border-box;
+  background: var(--em-level-1-background);
+  color: var(--em-level-1-contrast);
+
+  summary {
+    cursor: pointer;
+    padding: var(--em-spacing-l);
+    box-sizing: border-box;
+  }
+
+  section {
+    box-sizing: border-box;
+    padding: var(--em-spacing-l) var(--em-spacing-xl);
+    padding-top: unset;
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 }

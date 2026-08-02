@@ -12,6 +12,28 @@ const contextMap = {
     links,
     catFiles,
   },
+  '/music/index.html': {
+    secondaryNavLabel: 'Music pages',
+    secondaryNavLinks: [
+      {
+        name: 'listens',
+        label: 'Listens'
+      },
+      {
+        name: 'arrangements',
+        label: 'Arrangements'
+      },
+    ]
+  },
+  '/projects/index.html': {
+    secondaryNavLabel: 'Project pages',
+    secondaryNavLinks: [
+      {
+        name: 'deskcycle-kb',
+        label: 'Deskcycle KB'
+      },
+    ]
+  }
 };
 
 export default {

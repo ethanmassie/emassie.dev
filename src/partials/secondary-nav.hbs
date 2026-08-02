@@ -1,0 +1,15 @@
+<nav
+  class='secondary-nav'
+  aria-label='{{secondaryNavLabel}}'
+  hx-boost:inherited="swap:'innerHTML' target:#main-content"
+>
+  <ul>
+    {{#each secondaryNavLinks}}
+      <li>
+        <a href='{{name}}/index.html' hx-replace-url='#{{name}}'>
+          {{label}}
+        </a>
+      </li>
+    {{/each}}
+  </ul>
+</nav>
