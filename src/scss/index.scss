@@ -90,46 +90,51 @@ body {
 .secondary-nav-container {
   flex: 1 1 0;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: var(--em-spacing-l);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   nav.secondary-nav {
-    position: sticky;
-    top: var(--em-cap-element-height);
-    height: calc(100svh - (var(--em-cap-element-height) * 2));
-    padding: var(--em-spacing-l) 0px;
+    position: fixed;
+    left: var(--em-spacing-l);
+    top: calc(var(--em-cap-element-height) + var(--em-spacing-l));
+    max-height: calc(
+      100svh - ((var(--em-cap-element-height) * 2) + (var(--em-spacing-l) * 2))
+    );
     box-sizing: border-box;
-    background: var(--em-level-2-background);
-    color: var(--em-level-2-contrast);
+
     ul {
       list-style: none;
-      padding: unset;
+      padding: var(--em-spacing-m) var(--em-spacing-l);
       display: flex;
       flex-direction: column;
+      background: var(--em-level-2-background);
+      color: var(--em-level-2-contrast);
+      border-radius: var(--em-border-radius-l);
+      overflow-y: auto;
+      gap: var(--em-spacing-l);
 
       li {
         display: inline-flex;
         a {
           box-sizing: border-box;
-          padding: var(--em-spacing-m) var(--em-spacing-l);
+          padding: var(--em-spacing-m) 0px;
+          text-align: start;
           min-width: 100%;
           outline-offset: -4px;
         }
       }
-      
     }
   }
 
   .secondary-nav-content {
     flex: 1 1 0;
     display: flex;
-    justify-content: center;
 
     #main-content {
       padding-left: unset;
       padding: var(--em-spacing-m);
+      align-self: flex-start;
       h2 {
         margin: auto;
       }
@@ -163,4 +168,32 @@ body {
   bottom: 0px;
   justify-content: flex-end;
   align-items: center;
+}
+
+@media screen and (max-width: 1154px) {
+  .secondary-nav-container {
+    nav.secondary-nav {
+      position: sticky;
+      top: var(--em-cap-element-height);
+      left: unset;
+      max-height: unset;
+      padding: var(--em-spacing-l) var(--em-spacing-l);
+
+      ul {
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 512px) {
+  .site-headline {
+    visibility: hidden;
+  }
+
+  #main-content {
+    padding: var(--em-spacing-s);
+  }
 }

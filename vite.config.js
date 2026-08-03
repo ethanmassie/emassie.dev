@@ -17,23 +17,23 @@ const contextMap = {
     secondaryNavLinks: [
       {
         name: 'listens',
-        label: 'Listens'
+        label: 'Listens',
       },
       {
         name: 'arrangements',
-        label: 'Arrangements'
+        label: 'Arrangements',
       },
-    ]
+    ],
   },
   '/projects/index.html': {
     secondaryNavLabel: 'Project pages',
     secondaryNavLinks: [
       {
         name: 'deskcycle-kb',
-        label: 'Deskcycle KB'
+        label: 'Deskcycle KB',
       },
-    ]
-  }
+    ],
+  },
 };
 
 export default {

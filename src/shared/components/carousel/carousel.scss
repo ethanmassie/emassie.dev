@@ -29,3 +29,13 @@
   color: #fff;
   border: unset;
 }
+
+@media screen and (max-width: 512px) {
+  .carousel-scroll-btn {
+    display: none;
+  }
+
+  .carousel-scroll-area {
+    scrollbar-width: auto;
+  }
+}
