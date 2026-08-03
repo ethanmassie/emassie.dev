@@ -22,12 +22,19 @@
 }
 
 .carousel-scroll-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  height: 80%;
+  height: 50px;
+  width: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 9999px;
   font-weight: bold;
   background: #1d1d1db5;
   color: #fff;
   border: unset;
+  padding: unset;
 }
 
 @media screen and (max-width: 512px) {

@@ -12,6 +12,7 @@ export class IconElement extends LitElement {
       display: flex;
       align-items: center;
       justify-content: center;
+      color: inherit;
     }
 
     svg {

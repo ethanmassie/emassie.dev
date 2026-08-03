@@ -19,6 +19,12 @@
 
   --em-cap-element-height: 60px;
 
+  --_main-vertical-padding: var(--em-spacing-xl);
+  --_main-view-port-height: calc(
+    100svh -
+      ((var(--em-cap-element-height) * 2) + (var(--_main-vertical-padding) * 2))
+  );
+
   @include dark.theme();
 }
 
@@ -63,6 +69,20 @@ body {
     gap: var(--em-spacing-m);
   }
 
+  #site-link {
+    display: flex;
+    flex-direction: row;
+    gap: var(--em-spacing-m);
+    text-decoration: none;
+    color: var(--em-level-1-contrast);
+    align-items: center;
+  }
+
+  #site-icon {
+    height: 40px;
+    width: auto;
+  }
+
   nav {
     ul {
       list-style: none;
@@ -76,7 +96,7 @@ body {
 
 :where(#main-content) {
   flex: 1 1 0;
-  padding: var(--em-spacing-xl);
+  padding: var(--_main-vertical-padding);
   display: flex;
   flex-direction: column;
   align-self: center;
@@ -105,20 +125,19 @@ body {
 
     ul {
       list-style: none;
-      padding: var(--em-spacing-m) var(--em-spacing-l);
+      padding: var(--em-spacing-m) 0px;
       display: flex;
       flex-direction: column;
       background: var(--em-level-2-background);
       color: var(--em-level-2-contrast);
       border-radius: var(--em-border-radius-l);
       overflow-y: auto;
-      gap: var(--em-spacing-l);
 
       li {
         display: inline-flex;
         a {
           box-sizing: border-box;
-          padding: var(--em-spacing-m) 0px;
+          padding: var(--em-spacing-l) var(--em-spacing-l);
           text-align: start;
           min-width: 100%;
           outline-offset: -4px;
@@ -149,6 +168,10 @@ body {
 
 :where(.app-content) {
   max-width: var(--em-max-content-width, 950px);
+
+  em-window {
+    min-height: min(400px, var(--_main-view-port-height));
+  }
   .app-information {
     section {
       margin-bottom: var(--em-spacing-l);
@@ -183,14 +206,20 @@ body {
         flex-direction: row;
         overflow-x: auto;
         overflow-y: hidden;
+        padding: 0px var(--em-spacing-m);
       }
     }
   }
 }
 
-@media screen and (max-width: 512px) {
+@media screen and (max-width: 572px) {
+  :root {
+    --_main-vertical-padding: var(--em-spacing-s);
+  }
   .site-headline {
     visibility: hidden;
+    width: 0px;
+    height: 0px;
   }
 
   #main-content {

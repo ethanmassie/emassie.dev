@@ -36,6 +36,8 @@ pre {
   gap: var(--em-spacing-m);
   background-color: unset;
   color: white;
+  flex: 1 1 0;
+  align-items: flex-start;
 
   &:not(:focus-within) .terminal--input-label {
     animation: blink 1.5s infinite;
