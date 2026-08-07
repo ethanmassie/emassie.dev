@@ -49,11 +49,11 @@
       width: 24px;
 
       &.header--max-btn {
-        background: #79e216;
+        background: var(--em-window-maximize-button-background, #79e216);
       }
 
       &.header--close-btn {
-        background: #f33030;
+        background: var(--em-window-close-button-background, #f33030);
       }
     }
   }

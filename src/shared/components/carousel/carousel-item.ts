@@ -1,9 +1,9 @@
 import { html, LitElement, unsafeCSS } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import baseStyles from '../../styles/base-styles';
 import { pxStr } from '../../utils';
 import styles from './carousel-item.scss?inline';
-import { ifDefined } from 'lit/directives/if-defined.js';
 
 const ANIMATION_MS = 500;
 const DELAY_MS = 20;
@@ -81,6 +81,7 @@ export class CarouselImgElement extends LitElement {
     const rect = this.imageEl.getBoundingClientRect();
     const clone = this.imageEl.cloneNode() as HTMLImageElement;
     clone.classList.add('carousel-item--clone');
+    clone.id = 'image-clone';
 
     const modal = document.createElement('dialog');
     modal.ariaLabel = 'Enlarged image';
@@ -104,6 +105,7 @@ export class CarouselImgElement extends LitElement {
         if (modal.open) {
           modal.close();
         }
+        this.imageEl.style.visibility = '';
         modal.remove();
         this._cleanup = undefined;
       }, ANIMATION_MS);
@@ -126,6 +128,7 @@ export class CarouselImgElement extends LitElement {
 
     this.shadowRoot!.append(modal);
     modal.showModal();
+    this.imageEl.style.visibility = 'hidden';
 
     // delay style changes to ensure transitions occur
     setTimeout(() => {

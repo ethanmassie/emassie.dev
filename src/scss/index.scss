@@ -121,6 +121,8 @@ body {
     max-height: calc(
       100svh - ((var(--em-cap-element-height) * 2) + (var(--em-spacing-l) * 2))
     );
+    max-width: 200px;
+    width: 200px;
     box-sizing: border-box;
 
     ul {
@@ -193,13 +195,13 @@ body {
   align-items: center;
 }
 
-@media screen and (max-width: 1154px) {
+@media screen and (max-width: 1248px) {
   .secondary-nav-container {
     nav.secondary-nav {
-      position: sticky;
-      top: var(--em-cap-element-height);
-      left: unset;
+      position: initial;
       max-height: unset;
+      max-width: calc(100svw - var(--em-spacing-l));
+      width: fit-content;
       padding: var(--em-spacing-l) var(--em-spacing-l);
 
       ul {

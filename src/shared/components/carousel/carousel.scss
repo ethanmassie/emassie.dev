@@ -31,13 +31,13 @@
   aspect-ratio: 1 / 1;
   border-radius: 9999px;
   font-weight: bold;
-  background: #1d1d1db5;
-  color: #fff;
+  background: var(--em-level-1-background);
+  color: var(--em-level-1-contrast);
   border: unset;
   padding: unset;
 }
 
-@media screen and (max-width: 512px) {
+@media screen and (max-width: 572px) {
   .carousel-scroll-btn {
     display: none;
   }

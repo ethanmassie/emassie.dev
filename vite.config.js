@@ -20,8 +20,8 @@ const contextMap = {
         label: 'Listens',
       },
       {
-        name: 'arrangements',
-        label: 'Arrangements',
+        name: 'classical-guitar',
+        label: 'Classical Guitar',
       },
     ],
   },
