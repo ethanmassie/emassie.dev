@@ -1,0 +1,32 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: var(--em-spacing-m);
+  align-items: center;
+}
+
+.em-htmx-tabs--tab-group {
+  display: flex;
+  background: var(--em-htmx-tabs-background, var(--em-level-1-background));
+  color: var(--em-level-1-contrast);
+  width: 100%;
+  padding: 0px var(--em-spacing-xl);
+  border-radius: 9999px;
+  overflow: hidden;
+  justify-content: space-between;
+  box-sizing: border-box;
+
+  .em-htmx-tabs--tab {
+    height: 100%;
+    font-size: 16px;
+    padding: var(--em-spacing-l) var(--em-spacing-m);
+    background: inherit;
+    color: inherit;
+    border: unset;
+    cursor: pointer;
+
+    &.em-htmx-tabs--active-tab {
+      color: var(--em-primary-color);
+    }
+  }
+}

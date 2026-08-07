@@ -89,27 +89,8 @@
   </li>
 </ul>
 <h3>Listenbrainz Most Listened</h3>
-<section class="listenbrainz-section">
-  <h4 id="this-month-listens-header">This Month</h4>
-  <div
-    class="listenbrainz-template"
-    hx-trigger="load"
-    hx-get="/lb/this-month.html"
-  ></div>
-</section>
-<section class="listenbrainz-section">
-  <h4 id="this-year-listens-header">This Year</h4>
-  <div
-    class="listenbrainz-template"
-    hx-trigger="load"
-    hx-get="/lb/this-year.html"
-  ></div>
-</section>
-<section class="listenbrainz-section">
-  <h4 id="all-time-listens-header">All Time</h4>
-  <div
-    class="listenbrainz-template"
-    hx-trigger="load"
-    hx-get="/lb/all-time-listens.html"
-  ></div>
-</section>
+
+<em-htmx-tabs
+  class="listenbrainz-tabs"
+  tabs='[{"label": "This Month", "get": "/lb/this-month.html", "default": true}, {"label": "This Year", "get": "/lb/this-year.html"}, {"label": "All Time", "get": "/lb/all-time-listens.html"}]'
+></em-htmx-tabs>
