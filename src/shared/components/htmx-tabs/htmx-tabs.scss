@@ -24,6 +24,7 @@
     color: inherit;
     border: unset;
     cursor: pointer;
+    outline-offset: -2px;
 
     &.em-htmx-tabs--active-tab {
       color: var(--em-primary-color);

@@ -121,8 +121,11 @@ body {
     max-height: calc(
       100svh - ((var(--em-cap-element-height) * 2) + (var(--em-spacing-l) * 2))
     );
-    max-width: 200px;
-    width: 200px;
+    --_secondary-nav-width: calc(
+      ((100svw - var(--em-max-content-width)) / 2) - (var(--em-spacing-l) * 2)
+    );
+    max-width: 300px;
+    width: var(--_secondary-nav-width);
     box-sizing: border-box;
 
     ul {
@@ -163,9 +166,13 @@ body {
   }
 }
 
-:where(#main-content.text-content) {
-  align-items: flex-start;
+:where(.text-content) {
   --em-max-content-width: 800px;
+
+  &#main-content,
+  #main-content {
+    align-items: flex-start;
+  }
 }
 
 :where(.app-content) {

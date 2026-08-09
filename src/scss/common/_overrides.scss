@@ -10,9 +10,10 @@ p {
 
 a,
 a:visited {
-  display: inline-block;
+  display: inline-flex;
   box-sizing: border-box;
   height: fit-content;
+  gap: var(--em-spacing-m);
   color: var(--em-primary-color);
   padding: var(--em-spacing-s) var(--em-spacing-s);
 

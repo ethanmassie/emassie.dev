@@ -1,9 +1,10 @@
 import htmx from 'htmx.org';
 import { html, LitElement, unsafeCSS, type PropertyValues } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { map } from 'lit/directives/map.js';
 import styles from './htmx-tabs.scss?inline';
+import baseStyles from '../../styles/base-styles';
 
 export type HtmxTabDefinition = {
   label: string;
@@ -15,13 +16,16 @@ export type HtmxTabDefinition = {
 export class HtmxTabsElement extends LitElement {
   override shadowRoot!: ShadowRoot;
 
-  static styles = [unsafeCSS(styles)];
+  static styles = [unsafeCSS(styles), baseStyles];
 
   @property({ type: Array })
   tabs: HtmxTabDefinition[] = [];
 
   @state()
   activeTab?: HtmxTabDefinition;
+
+  @query('#tab-list', true)
+  tabList!: HTMLElement;
 
   private _outletElement?: HTMLElement;
 
@@ -38,8 +42,11 @@ export class HtmxTabsElement extends LitElement {
   protected render() {
     return html`
       <div
+        id="tab-list"
         class="em-htmx-tabs--tab-group"
         part="tab-group"
+        role="tablist"
+        @keydown=${this._handleTablistNav.bind(this)}
       >
         ${map(
           this.tabs,
@@ -50,6 +57,9 @@ export class HtmxTabsElement extends LitElement {
               })}"
               part="tab"
               data-index="${i}"
+              role="tab"
+              aria-controls
+              aria-selected=${tab === this.activeTab ? 'true' : 'false'}
               @click=${this._handleTabClick.bind(this)}
             >
               ${tab.label}
@@ -57,7 +67,12 @@ export class HtmxTabsElement extends LitElement {
           `,
         )}
       </div>
-      <slot name="outlet"></slot>
+      <div
+        id="tab-panel"
+        role="tabpanel"
+      >
+        <slot name="outlet"></slot>
+      </div>
     `;
   }
 
@@ -94,6 +109,34 @@ export class HtmxTabsElement extends LitElement {
     }
 
     this.activeTab = this.tabs[index];
+  }
+
+  private _handleTablistNav(event: KeyboardEvent): void {
+    const target = event.target as HTMLElement;
+    if (target.role !== 'tab') {
+      return;
+    }
+
+    let focusTarget: HTMLElement | null = null;
+    switch (event.key) {
+      case 'ArrowLeft':
+        focusTarget =
+          (target.previousElementSibling as HTMLElement) ||
+          this.tabList.querySelector('[role="tab"]:last-child');
+        break;
+      case 'ArrowRight':
+        focusTarget =
+          (target.nextElementSibling as HTMLElement) ||
+          this.tabList.querySelector('[role="tab"]:first-child');
+        break;
+      default:
+        return;
+    }
+
+    if (focusTarget) {
+      event.preventDefault();
+      focusTarget.focus();
+    }
   }
 }
 

@@ -6,7 +6,10 @@
   <ul>
     {{#each secondaryNavLinks}}
       <li>
-        <a href='{{name}}/index.html' hx-replace-url='#{{name}}'>
+        <a href='{{name}}/index.html' hx-replace-url='?sn={{name}}'>
+          {{#if icon}}
+            <em-icon path='{{icon}}'></em-icon>
+          {{/if}}
           {{label}}
         </a>
       </li>
