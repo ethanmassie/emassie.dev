@@ -29,7 +29,7 @@ Object.entries(links).forEach(async ([file, src]) => {
       ADD_ATTR: ['target'],
     });
     return new Promise((resolve, reject) => {
-      console.info(`Writing ${output}/${file}`)
+      console.info(`Writing ${output}/${file}`);
       writeFile(`${output}/${file}`, cleanTxt, (err) => {
         if (err !== null) {
           reject(err);
@@ -37,7 +37,7 @@ Object.entries(links).forEach(async ([file, src]) => {
         resolve();
       });
     });
-  } catch(e) {
+  } catch (e) {
     console.error(`Failed to fetch ${src} and write to ${file}`);
     console.error(err);
   }

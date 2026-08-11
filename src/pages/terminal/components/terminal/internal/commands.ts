@@ -100,9 +100,15 @@ export const cat: ExecutableFn = (_term, fs, [path]) => {
 
 export const cowSay: ExecutableFn = (_term, _fs, args) => {
   const message = args.join(' ') || 'Type your message after the command';
-  return success(String.raw`      ${'_'.repeat(message.length + 4)}
-      < ${message} >
-      ${'-'.repeat(message.length + 4)}
+  const longestLine = message
+    .split('\n')
+    .reduce((acc, line) => (line.length > acc.length ? line : acc), '');
+
+  /** indent every new line of multiline messages by 8 spaces to account for cow indentation */
+  const indentedMessage = message.replaceAll('\n', '\n' + ' '.repeat(8));
+  return success(String.raw`      ${'_'.repeat(longestLine.length + 4)}
+      < ${indentedMessage} >
+      ${'-'.repeat(longestLine.length + 4)}
           \   ^__^
            \  (oo)\_______
               (__)\       )\/\
@@ -111,7 +117,8 @@ export const cowSay: ExecutableFn = (_term, _fs, args) => {
 };
 
 export const exitTerminal: ExecutableFn = () => {
-  history.back();
+  location.href = '/';
+
   return success();
 };
 

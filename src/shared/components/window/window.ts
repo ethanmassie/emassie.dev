@@ -62,7 +62,7 @@ export class WindowElement extends LitElement {
             aria-label="Close"
             class="header--btn header--close-btn"
             @click=${() => {
-              history.back();
+              location.href = '/';
             }}
           >
             <em-icon path=${mdiClose}></em-icon>
