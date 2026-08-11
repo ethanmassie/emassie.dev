@@ -21,24 +21,24 @@ const links = {
 mkdirSync(output, { recursive: true });
 
 Object.entries(links).forEach(async ([file, src]) => {
-  await fetch(src)
-    .then((resp) => resp.text())
-    .then((text) => {
-      const cleanTxt = DOMPurify.sanitize(text, {
-        ADD_ATTR: ['target'],
-      });
-
-      return new Promise((resolve, reject) => {
-        writeFile(`${output}/${file}`, cleanTxt, {}, (err) => {
-          if (err !== null) {
-            reject(err);
-          }
-          resolve();
-        });
-      });
-    })
-    .catch((err) => {
-      console.error(err);
-      exit(1);
+  try {
+    console.info(`Fetching ${src}`);
+    const resp = await fetch(src);
+    const text = await resp.text();
+    const cleanTxt = DOMPurify.sanitize(text, {
+      ADD_ATTR: ['target'],
     });
+    return new Promise((resolve, reject) => {
+      console.info(`Writing ${output}/${file}`)
+      writeFile(`${output}/${file}`, cleanTxt, (err) => {
+        if (err !== null) {
+          reject(err);
+        }
+        resolve();
+      });
+    });
+  } catch(e) {
+    console.error(`Failed to fetch ${src} and write to ${file}`);
+    console.error(err);
+  }
 });
