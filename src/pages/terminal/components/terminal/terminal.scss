@@ -39,7 +39,7 @@ pre {
   flex: 1 1 0;
   align-items: flex-start;
 
-  &:not(:focus-within) .terminal--input-label {
+  &:not(:focus-within):has(input:invalid) .terminal--input-label {
     animation: blink 1.5s infinite;
   }
 

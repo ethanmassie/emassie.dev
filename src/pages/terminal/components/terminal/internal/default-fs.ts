@@ -1,8 +1,8 @@
 import { buildDir, type FileSystem, buildTextFile } from './filesystem';
 import { buildExec, cowSay, executables } from './commands';
-import mugiTxt from './mugi.txt?raw';
-import viviTxt from './vivi.txt?raw';
-import blackHoleTxt from './blackhole.txt?raw';
+import mugiTxt from './assets/mugi.txt?raw';
+import viviTxt from './assets/vivi.txt?raw';
+import blackHoleTxt from './assets/blackhole.txt?raw';
 
 export function makeFS(): FileSystem {
   const root = buildDir('', [

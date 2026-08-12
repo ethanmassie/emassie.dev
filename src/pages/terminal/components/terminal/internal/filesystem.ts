@@ -38,8 +38,18 @@ export type Dir = {
 
 export type FsNode = TextFile | Executable | Dir;
 
+type Orphan = {
+  parent: never;
+};
+
+export type OrphanTextFile = Omit<TextFile, 'parent'> & Orphan;
+export type OrphanExecutable = Omit<Executable, 'parent'> & Orphan;
+export type OrphanDir = Omit<Dir, 'parent'> & Orphan;
+export type RootDir = OrphanDir;
+export type OrphanFsNode = OrphanTextFile | OrphanExecutable | OrphanDir;
+
 export type FileSystem = {
-  root: Dir;
+  root: RootDir;
   cwd: Dir;
   // directories to look for executables in
   path: string[];
@@ -62,7 +72,7 @@ export function getPath(dir: Dir) {
   return path.reverse().join('/') || '/';
 }
 
-export function addChild(dir: Dir, node: Omit<FsNode, 'parent'>): Dir {
+export function addChild(dir: Dir, node: OrphanFsNode): Dir {
   if (!dir.children) {
     dir.children = [];
   }
@@ -74,9 +84,10 @@ export function addChild(dir: Dir, node: Omit<FsNode, 'parent'>): Dir {
   return dir;
 }
 
+export function buildDir(name: string, children: OrphanFsNode[]): OrphanDir;
 export function buildDir(
   name: string,
-  children: Omit<FsNode, 'parent'>[],
+  children: OrphanFsNode[],
   parent?: Dir,
 ): Dir {
   const dir: Dir = {
@@ -92,6 +103,10 @@ export function buildDir(
   return dir as Dir;
 }
 
+export function buildTextFile(
+  name: string,
+  contents: string | (() => string),
+): OrphanTextFile;
 export function buildTextFile(
   name: string,
   contents: string | (() => string),
@@ -111,36 +126,25 @@ export function findChild(dir: Dir, name: string) {
 }
 
 export function findRelativeFile(dir: Dir, path: string[]): FsNode | undefined {
-  let currentDir = dir;
-  for (let i = 0; i < path.length; i++) {
-    const isLastPart = i === path.length - 1;
-    const part = path[i];
-    if (part === '.') {
-      continue;
-    }
-
-    if (part === '..') {
-      if (currentDir.parent === undefined) {
+  return path.reduce(
+    (currentNode, pathPart) => {
+      // found nothing or reached a non dir before the terminal point
+      if (!currentNode || currentNode.type !== 'dir') {
         return undefined;
       }
 
-      currentDir = currentDir.parent;
-      continue;
-    }
-    const child = findChild(currentDir, part);
+      if (pathPart === '.') {
+        return currentNode;
+      }
 
-    if (isLastPart) {
-      return child;
-    }
+      if (pathPart === '..') {
+        return currentNode.parent;
+      }
 
-    if (!child || child.type !== 'dir') {
-      return undefined;
-    }
-
-    currentDir = child as Dir;
-  }
-
-  return currentDir;
+      return findChild(currentNode, pathPart);
+    },
+    dir as FsNode | undefined,
+  );
 }
 
 function findFileInPath(fs: FileSystem, name: string) {
@@ -197,7 +201,7 @@ export function findFile(
   const hasLeadingSlash = path.match(/^\//) !== null;
   const parts = path.split('/');
   if (hasLeadingSlash) {
-    // remove leading dot or empty space
+    // remove empty space left by the leading slash
     parts.splice(0, 1);
   }
 

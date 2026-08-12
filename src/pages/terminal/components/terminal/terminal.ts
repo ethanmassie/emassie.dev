@@ -3,6 +3,15 @@ import { customElement, query } from 'lit/decorators.js';
 import styles from './terminal.scss?inline';
 import { findFile, type ExecutableResult } from './internal/filesystem';
 import { makeFS } from './internal/default-fs';
+import {
+  parseTerminalInput,
+  type Literal,
+  type Token,
+} from './internal/parser';
+
+type VariableMap = {
+  [key: string]: string | number;
+};
 
 @customElement('em-terminal')
 export class TerminalElement extends LitElement {
@@ -17,6 +26,11 @@ export class TerminalElement extends LitElement {
   private _commandHistory: string[] = [];
   private _commandHistoryPointer?: number;
   private _commandBackup?: string;
+  private _variables: VariableMap = {
+    '?': 0,
+    HOME: '/home/emassie',
+    PATH: '/bin',
+  };
 
   protected render(): unknown {
     return html`
@@ -29,6 +43,7 @@ export class TerminalElement extends LitElement {
         <input
           id="input"
           autocomplete="off"
+          required
           class="terminal--input-field"
           @keydown=${this._handleKey.bind(this)}
         />
@@ -123,6 +138,14 @@ export class TerminalElement extends LitElement {
     this.inputEl.value = historyValue;
   }
 
+  private _getVar(key: string, tmp?: VariableMap): string | number | undefined {
+    return tmp ? tmp[key] || this._variables[key] : this._variables[key];
+  }
+
+  private _setVar(key: string, value: string | number) {
+    this._variables[key] = value;
+  }
+
   private _printInput(value: string) {
     this.printRichText(html`
       <span class="printed-cursor">></span>
@@ -135,26 +158,19 @@ export class TerminalElement extends LitElement {
     this._commandHistoryPointer = undefined;
     this._printInput(inputValue);
 
-    const result = inputValue.split('|').reduce(({ code, msg }, input) => {
-      const parts = input.trim().split(' ');
-      const command = parts[0];
-      const args = parts.slice(1);
-
-      if (!isNaN(code) && code !== 0) {
-        return { code, msg };
+    let parsedInput: Token[][];
+    try {
+      parsedInput = parseTerminalInput(inputValue);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        this.print(e.message);
       }
 
-      if (msg) {
-        args.push(msg);
-      }
+      this._setVar('?', 1);
+      return;
+    }
 
-      const executable = findFile(this._fs, command, 'exec', true);
-      if (!executable) {
-        return { code: 1, msg: 'No such file or directory' };
-      }
-
-      return executable.exec(this, this._fs, args);
-    }, {} as ExecutableResult);
+    const result = this._executeCommand(parsedInput);
 
     if (!result || !result.msg) {
       return;
@@ -163,5 +179,53 @@ export class TerminalElement extends LitElement {
     if (result.msg) {
       this.print(result.msg);
     }
+
+    if (!isNaN(result.code)) {
+      this._setVar('?', result.code);
+    }
+  }
+
+  private _executeCommand(parsedInput: Token[][]): ExecutableResult {
+    const tmpVars: VariableMap = {};
+    return parsedInput.reduce(({ code, msg }, tokens) => {
+      if (!isNaN(code) && code !== 0) {
+        return { code, msg };
+      }
+
+      tokens
+        .filter((t) => t.type === 'assignment')
+        .forEach((assignment) => {
+          tmpVars[assignment.variable] = assignment.value;
+        });
+
+      const commandLiteralIndex = tokens.findIndex((t) => t.type === 'literal');
+      if (commandLiteralIndex === -1) {
+        return { code: 1, msg: 'Invalid command' };
+      }
+      const commandLiteral = tokens[commandLiteralIndex] as Literal;
+      const executable = findFile(this._fs, commandLiteral.value, 'exec', true);
+      if (!executable) {
+        return { code: 1, msg: 'No such file or directory' };
+      }
+
+      const args = tokens
+        .slice(commandLiteralIndex + 1)
+        // TODO: handle args other than literals
+        .filter(
+          (token) => token.type === 'literal' || token.type === 'replacement',
+        )
+        .map((arg) => {
+          if (arg.type === 'literal') {
+            return arg.value;
+          }
+
+          return this._getVar(arg.variable, tmpVars)?.toString() || '';
+        });
+      if (msg) {
+        args.push(msg);
+      }
+
+      return executable.exec(this, this._fs, args);
+    }, {} as ExecutableResult);
   }
 }

@@ -6,6 +6,7 @@ import {
   type ExecutableFn,
   type ExecutableResult,
   type FileType,
+  type OrphanExecutable,
 } from './filesystem';
 
 function showFileType(type: FileType) {
@@ -126,6 +127,12 @@ export const echo: ExecutableFn = (_term, _fs, args) => {
   return success(args.join(' '));
 };
 
+export function buildExec(name: string, exec: ExecutableFn): OrphanExecutable;
+export function buildExec(
+  name: string,
+  exec: ExecutableFn,
+  parent: Dir,
+): Executable;
 export function buildExec(
   name: string,
   exec: ExecutableFn,
@@ -139,7 +146,7 @@ export function buildExec(
   };
 }
 
-export const executables: Omit<Executable, 'parent'>[] = [
+export const executables = [
   buildExec('ls', ls),
   buildExec('pwd', pwd),
   buildExec('cd', cd),
