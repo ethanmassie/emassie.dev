@@ -29,7 +29,11 @@ export class IconElement extends LitElement {
 
   protected render(): unknown {
     return html`
-      <svg viewBox="0 0 24 24">
+      <svg
+        viewBox="0 0 24 24"
+        height="100%"
+        width="100%"
+      >
         <path d=${this.path}></path>
       </svg>
     `;
