@@ -1,0 +1,7 @@
+{
+  "listenTabs": [
+    { "label": "This Month", "get": "/lb/this-month.html", "default": true },
+    { "label": "This Year", "get": "/lb/this-year.html" },
+    { "label": "All Time", "get": "/lb/all-time-listens.html" }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "secondaryNavLabel": "Music",
+  "secondaryNavLinks": [
+    {
+      "name": "listens",
+      "label": "Listens",
+      "icon": "mdiMusicNote"
+    },
+    {
+      "name": "classical-guitar",
+      "label": "Classical Guitar",
+      "icon": "mdiGuitarAcoustic"
+    }
+  ]
+}

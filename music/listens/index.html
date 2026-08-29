@@ -1,4 +1,12 @@
 <h2>Music | Listens</h2>
+
+<h3>Listenbrainz Most Listened</h3>
+
+<em-htmx-tabs
+  class="listenbrainz-tabs"
+  tabs="{{ json listenTabs }}"
+></em-htmx-tabs>
+
 <article>
   <h3>My Music Habits</h3>
   <p>
@@ -26,6 +34,7 @@
     degredation make me happy to continue consuming music my way.
   </p>
 </article>
+
 <h3>My Music Stack</h3>
 <ul>
   <li>
@@ -88,9 +97,3 @@
     </a>
   </li>
 </ul>
-<h3>Listenbrainz Most Listened</h3>
-
-<em-htmx-tabs
-  class="listenbrainz-tabs"
-  tabs='[{"label": "This Month", "get": "/lb/this-month.html", "default": true}, {"label": "This Year", "get": "/lb/this-year.html"}, {"label": "All Time", "get": "/lb/all-time-listens.html"}]'
-></em-htmx-tabs>
