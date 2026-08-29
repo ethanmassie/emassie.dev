@@ -49,12 +49,18 @@
       width: 24px;
 
       &.header--max-btn {
-        background: var(--em-window-maximize-button-background, var(--em-success-background));
+        background: var(
+          --em-window-maximize-button-background,
+          var(--em-success-background)
+        );
         color: var(--em-success-contrast);
       }
 
       &.header--close-btn {
-        background: var(--em-window-close-button-background, var(--em-danger-background));
+        background: var(
+          --em-window-close-button-background,
+          var(--em-danger-background)
+        );
         color: var(--em-danger-contrast);
       }
     }

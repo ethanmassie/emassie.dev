@@ -57,6 +57,7 @@ body {
   color: var(--em-level-1-contrast);
   padding: var(--em-spacing-m) var(--em-spacing-l);
   height: var(--em-cap-element-height);
+  z-index: 1;
 }
 
 #main-header {
