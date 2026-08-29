@@ -229,3 +229,9 @@ export class TerminalElement extends LitElement {
     }, {} as ExecutableResult);
   }
 }
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'em-terminal': TerminalElement;
+  }
+}
