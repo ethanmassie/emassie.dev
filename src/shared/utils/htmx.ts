@@ -7,13 +7,16 @@ export function reinitContent(
   linkSelectorBase = '.secondary-nav',
   target = '#main-content',
 ) {
-  const snRouteParam = location.href.match(/\?sn=[a-zA-Z  ]*/);
+  const snRouteParam = location.href.match(/\?sn=[a-zA-Z\-]*/);
+  console.log(snRouteParam);
   if (!snRouteParam) {
     return;
   }
+  console.log(`${linkSelectorBase} a[hx-replace-url="${snRouteParam[0]}"]`);
   const link = document.querySelector<HTMLAnchorElement>(
     `${linkSelectorBase} a[hx-replace-url="${snRouteParam[0]}"]`,
   );
+  console.log(link);
   if (!link) {
     return;
   }
