@@ -1,0 +1,10 @@
+{
+  "guitarRecordings": [
+    {
+      "id": "0",
+      "title": "La Vie en Rose",
+      "artist": "Louis Guglielmi (arr. Sky Guitar)",
+      "src": "/guitar-recordings/la-vie-en-rose.wav"
+    }
+  ]
+}

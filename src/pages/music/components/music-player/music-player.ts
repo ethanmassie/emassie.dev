@@ -25,14 +25,7 @@ export class MusicPlayerElement extends LitElement {
   static styles = [unsafeCSS(styles), baseStyles];
 
   @property({ type: Array })
-  tracks: MusicPlayerTrack[] = [
-    {
-      id: '0',
-      title: 'La Vie en Rose',
-      artist: 'Louis Guglielmi (arr. Sky Guitar)',
-      src: '/guitar-recordings/la-vie-en-rose.wav',
-    },
-  ];
+  tracks: MusicPlayerTrack[] = [];
 
   @state() private _currentTrack?: MusicPlayerTrack;
 
