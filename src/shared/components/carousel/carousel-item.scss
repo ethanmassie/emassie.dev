@@ -6,6 +6,12 @@
   padding: var(--em-spacing-m);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  :host {
+    --_animation-time: 0ms !important;
+  }
+}
+
 :host([can-enlarge]) {
   .carousel-item--wrapper #image {
     cursor: pointer;
@@ -53,3 +59,4 @@
     }
   }
 }
+

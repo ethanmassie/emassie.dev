@@ -2,11 +2,8 @@ import { html, LitElement, unsafeCSS } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import baseStyles from '../../styles/base-styles';
-import { pxStr } from '../../utils';
+import { pxStr, oneEvent } from '../../utils';
 import styles from './carousel-item.scss?inline';
-
-const ANIMATION_MS = 500;
-const DELAY_MS = 20;
 
 @customElement('em-carousel-img')
 export class CarouselImgElement extends LitElement {
@@ -78,6 +75,10 @@ export class CarouselImgElement extends LitElement {
     if (this._isEnlarged()) {
       return;
     }
+
+    const styles = getComputedStyle(this);
+    const animationTime = styles.getPropertyValue('--_animation-time');
+    const animate = animationTime !== '0ms';
     const rect = this.imageEl.getBoundingClientRect();
     const clone = this.imageEl.cloneNode() as HTMLImageElement;
     clone.classList.add('carousel-item--clone');
@@ -98,17 +99,27 @@ export class CarouselImgElement extends LitElement {
         e.stopPropagation();
       }
 
-      modal.classList.remove('full-size');
-      clone.classList.remove('full-size');
-      // wait for animation to finish
-      setTimeout(() => {
+      const removeModal = () => {
+        this.imageEl.style.visibility = '';
+        this._cleanup = undefined;
+        if (!modal) {
+          return;
+        }
+
         if (modal.open) {
           modal.close();
         }
-        this.imageEl.style.visibility = '';
         modal.remove();
-        this._cleanup = undefined;
-      }, ANIMATION_MS);
+      };
+
+      if (animate) {
+        oneEvent(modal, 'transitionend', removeModal);
+
+        modal.classList.remove('full-size');
+        clone.classList.remove('full-size');
+      } else {
+        removeModal();
+      }
     };
 
     modal.addEventListener('keydown', (e) => {
@@ -120,8 +131,8 @@ export class CarouselImgElement extends LitElement {
         this._cleanup(e);
       }
     });
-    modal.addEventListener('click', (e: Event) => {
-      if (e.target === modal && this._cleanup) {
+    modal.addEventListener('click', (_e: Event) => {
+      if (this._cleanup) {
         this._cleanup();
       }
     });
@@ -132,14 +143,15 @@ export class CarouselImgElement extends LitElement {
 
     // delay style changes to ensure transitions occur
     setTimeout(() => {
+      if (animate) {
+        oneEvent(clone, 'transitionend', () => {
+          modal.style.setProperty('--_auto-width', pxStr(clone.clientWidth));
+        });
+      }
+
       modal.classList.add('full-size');
       clone.classList.add('full-size');
-    }, DELAY_MS);
-
-    // determine what the auto width was calculated to be and set it as a custom property so the transition out can animate the width shrinking
-    setTimeout(() => {
-      modal.style.setProperty('--_auto-width', pxStr(clone.clientWidth));
-    }, ANIMATION_MS + DELAY_MS);
+    }, 0);
   }
 }
 
