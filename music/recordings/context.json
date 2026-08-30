@@ -1,0 +1,16 @@
+{
+  "guitarRecordings": [
+    {
+      "id": "0",
+      "title": "La Vie en Rose",
+      "artist": "Louis Guglielmi (arr. Sky Guitar)",
+      "src": "/guitar-recordings/La Vie en Rose.wav"
+    },
+    {
+      "id": "1",
+      "title": "魔道士ケフカ (The Wizard Kefka)",
+      "artist": "Nobuo Uematsu (arr. Nobuyuki Hirakura)",
+      "src": "/guitar-recordings/kefka.wav"
+    }
+  ]
+}

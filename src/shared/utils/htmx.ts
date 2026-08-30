@@ -8,18 +8,28 @@ export function reinitContent(
   target = '#main-content',
 ) {
   const snRouteParam = location.href.match(/\?sn=[a-zA-Z\-]*/);
-  console.log(snRouteParam);
   if (!snRouteParam) {
     return;
   }
-  console.log(`${linkSelectorBase} a[hx-replace-url="${snRouteParam[0]}"]`);
-  const link = document.querySelector<HTMLAnchorElement>(
+
+  const loadedOldLink = loadLink(
+    target,
     `${linkSelectorBase} a[hx-replace-url="${snRouteParam[0]}"]`,
   );
-  console.log(link);
-  if (!link) {
+  if (loadedOldLink) {
     return;
   }
 
+  loadLink(target, `${linkSelectorBase} a:first-child`);
+}
+
+function loadLink(target: string, selector: string): boolean {
+  const link = document.querySelector<HTMLAnchorElement>(selector);
+  if (!link) {
+    return false;
+  }
+
   htmx.ajax('GET', link.href, { target });
+
+  return true;
 }

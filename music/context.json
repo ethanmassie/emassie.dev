@@ -7,9 +7,14 @@
       "icon": "mdiMusicNote"
     },
     {
-      "name": "classical-guitar",
-      "label": "Classical Guitar",
+      "name": "arrangements",
+      "label": "Arrangements",
       "icon": "mdiGuitarAcoustic"
+    },
+    {
+      "name": "recordings",
+      "label": "Recordings",
+      "icon": "mdiAlbum"
     }
   ]
 }

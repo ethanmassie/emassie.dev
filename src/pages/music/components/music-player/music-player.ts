@@ -1,4 +1,4 @@
-import { mdiPlay } from '@mdi/js';
+import { mdiDownload, mdiPlay } from '@mdi/js';
 import {
   html,
   LitElement,
@@ -42,8 +42,18 @@ export class MusicPlayerElement extends LitElement {
     return this.tracks[currentIndex + 1] || this._currentTrack;
   }
 
-  @query('#audio-element')
+  @query('#audio-element', true)
   private _audioEl!: HTMLAudioElement;
+
+  @query('#audio-player', true)
+  private _audioPlayerEl!: HTMLDivElement;
+
+  @query('#now-playing', true)
+  private _nowPlayingEl!: HTMLDivElement;
+
+  private _resizeObserver = new ResizeObserver(() => {
+    this._setupTextScrollingAnimation();
+  });
 
   protected render(): TemplateResult {
     return html`
@@ -53,7 +63,11 @@ export class MusicPlayerElement extends LitElement {
             <td>Title</td>
             <td>Artist</td>
             <td
-              class="em-music-player--play-column"
+              class="em-music-player--btn-column"
+              aria-label="Download"
+            ></td>
+            <td
+              class="em-music-player--btn-column"
               aria-label="Play"
             ></td>
           </tr>
@@ -63,8 +77,16 @@ export class MusicPlayerElement extends LitElement {
             this.tracks,
             (track) => html`
               <tr>
-                <td>${track.title}</td>
-                <td>${track.artist}</td>
+                <td title=${track.title}>${track.title}</td>
+                <td title=${track.artist}>${track.artist}</td>
+                <td>
+                  <button
+                    aria-label="Download"
+                    @click=${() => this._downloadTrack(track)}
+                  >
+                    <em-icon path=${mdiDownload}></em-icon>
+                  </button>
+                </td>
                 <td>
                   <button
                     aria-label="Play"
@@ -80,15 +102,17 @@ export class MusicPlayerElement extends LitElement {
       </table>
 
       <div
-        class="em-music-player--audio-player"
+        id="audio-player"
         hidden=${ifDefined(this._currentTrack ? nothing : true)}
       >
-        <div class="em-music-player--now-playing">
+        <div
+          id="now-playing"
+          style="animation: none"
+        >
           ${this._currentTrack?.title} by ${this._currentTrack?.artist}
         </div>
         <audio
           id="audio-element"
-          class="em-music-player--audio-element"
           controls
           src="${this._currentTrack?.src}"
           @ended=${this._playNextTrack.bind(this)}
@@ -97,9 +121,16 @@ export class MusicPlayerElement extends LitElement {
     `;
   }
 
+  protected firstUpdated(_changedProperties: PropertyValues): void {
+    this._resizeObserver.observe(this._audioPlayerEl);
+  }
+
   protected updated(changedProperties: PropertyValues): void {
     if (changedProperties.has('_currentTrack')) {
       this._audioEl.play();
+      this._nowPlayingEl.style.animation = '';
+
+      this._setupTextScrollingAnimation();
     }
   }
 
@@ -119,6 +150,31 @@ export class MusicPlayerElement extends LitElement {
     }
 
     this._currentTrack = this._nextTrack;
+  }
+
+  private _downloadTrack(track: MusicPlayerTrack) {
+    const a = document.createElement('a');
+    a.href = track.src;
+    const fileName = track.src.split('/').slice(-1)[0] || 'recording';
+    a.download = fileName;
+
+    a.click();
+    a.remove();
+  }
+
+  private _setupTextScrollingAnimation() {
+    const textOverflowing =
+      this._nowPlayingEl.clientWidth >= this._audioPlayerEl.clientWidth;
+    this._nowPlayingEl.classList.toggle('animated-scroll', textOverflowing);
+    this._nowPlayingEl.style.setProperty(
+      '--_width',
+      `${this._nowPlayingEl.clientWidth}px`,
+    );
+
+    this.style.setProperty(
+      '--_controls-height',
+      `${this._audioPlayerEl.clientHeight}px`,
+    );
   }
 }
 
