@@ -60,15 +60,15 @@ export class MusicPlayerElement extends LitElement {
       <table class="em-music-player--tracks-table">
         <thead>
           <tr>
+            <td
+              class="em-music-player--btn-column"
+              aria-label="Play"
+            ></td>
             <td>Title</td>
             <td>Artist</td>
             <td
               class="em-music-player--btn-column"
               aria-label="Download"
-            ></td>
-            <td
-              class="em-music-player--btn-column"
-              aria-label="Play"
             ></td>
           </tr>
         </thead>
@@ -77,22 +77,24 @@ export class MusicPlayerElement extends LitElement {
             this.tracks,
             (track) => html`
               <tr>
+                <td>
+                  <button
+                    aria-label="Play"
+                    title="Play"
+                    @click=${() => this._playTrack(track)}
+                  >
+                    <em-icon path=${mdiPlay}></em-icon>
+                  </button>
+                </td>
                 <td title=${track.title}>${track.title}</td>
                 <td title=${track.artist}>${track.artist}</td>
                 <td>
                   <button
                     aria-label="Download"
+                    title="Download"
                     @click=${() => this._downloadTrack(track)}
                   >
                     <em-icon path=${mdiDownload}></em-icon>
-                  </button>
-                </td>
-                <td>
-                  <button
-                    aria-label="Play"
-                    @click=${() => this._playTrack(track)}
-                  >
-                    <em-icon path=${mdiPlay}></em-icon>
                   </button>
                 </td>
               </tr>
