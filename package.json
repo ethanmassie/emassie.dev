@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "update-listenbrainz": "node ./update-listenbrainz.mjs",
-    "build": "npm run update-listenbrainz && tsc && vite build",
+    "build": "tsc && vite build",
     "preview": "vite preview",
     "format": "prettier -w ."
   },
