@@ -1,10 +1,7 @@
 :host {
   --_controls-bottom-offset: var(
     --em-music-player-controls-bottom-offset,
-    calc(
-      var(--em-music-player-offset-bottom, var(--em-cap-element-height)) +
-        var(--em-spacing-l)
-    )
+    var(--em-spacing-l)
   );
 
   margin-bottom: calc(var(--_controls-height, 85px) + var(--em-spacing-m));

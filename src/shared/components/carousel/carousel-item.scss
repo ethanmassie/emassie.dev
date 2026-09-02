@@ -4,6 +4,7 @@
   width: fit-content;
   --_animation-time: 500ms;
   padding: var(--em-spacing-m);
+  box-sizing: border-box;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -23,14 +24,20 @@
 }
 
 .carousel-item--modal {
+  display: inline-flex;
   margin: unset;
   padding: unset;
   border: unset;
-  background: transparent;
-  transition: all var(--_animation-time) ease-in-out;
+  background: #000;
   top: var(--_original-top);
   left: var(--_original-left);
   outline-offset: var(--em-spacing-m);
+
+  /** known issue: transform transitions do not work correctly on at least IOS webkit */
+  transition:
+    transform var(--_animation-time) ease-in-out,
+    top var(--_animation-time) ease-in-out,
+    left var(--_animation-time) ease-in-out;
 
   &::backdrop {
     opacity: 0;
@@ -40,7 +47,7 @@
   &.full-size {
     top: 50%;
     left: 50%;
-    translate: -50% -50%;
+    transform: translate(-50%, -50%);
 
     &::backdrop {
       opacity: 1;
@@ -50,12 +57,28 @@
   .carousel-item--clone {
     height: var(--_original-height) !important;
     width: var(--_original-width) !important;
-    transition: all var(--_animation-time) ease-in-out;
+    transition:
+      height var(--_animation-time) ease-in-out,
+      width var(--_animation-time) ease-in-out,
+      max-width var(--_animation-time) ease-in-out,
+      max-height var(--_animation-time) ease-in-out;
+    object-position: center;
+    object-fit: contain;
+
     &.full-size {
       height: 80vh !important;
       max-height: 80vh !important;
       width: var(--_auto-width, auto) !important;
       max-width: 80vw !important;
     }
+  }
+}
+
+@keyframes move-to-center {
+  0% {
+    transform: translate(0%, 0%);
+  }
+  100% {
+    transform: translate(-50%, -50%);
   }
 }
