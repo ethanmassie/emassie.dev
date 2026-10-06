@@ -8,4 +8,12 @@
   display: flex;
   align-items: center;
   gap: var(--em-spacing-m);
+
+  &--wrap {
+    flex-wrap: wrap;
+  }
+
+  &--center {
+    justify-content: center;
+  }
 }
